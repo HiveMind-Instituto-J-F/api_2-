@@ -1,4 +1,4 @@
-package com.api_rest.dto.RegistroParada;
+package com.api_rest.dto.registroParada;
 
 import jakarta.validation.constraints.NotNull;
 

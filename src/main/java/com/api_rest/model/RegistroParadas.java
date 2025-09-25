@@ -84,17 +84,13 @@ public class RegistroParadas {
         return id_manutencao;
     }
 
-    public void setId_manutencao(Integer id_manutencao) {
-        this.id_manutencao = id_manutencao;
-    }
+    public void setId_manutencao(Integer id_manutencao) {this.id_manutencao = id_manutencao;}
 
     public Integer getId_usuario() {
         return id_usuario;
     }
 
-    public void setId_usuario(Integer id_usuario) {
-        this.id_usuario = id_usuario;
-    }
+    public void setId_usuario(Integer id_usuario) { this.id_usuario = id_usuario; }
 
     public Date getDate() {
         return date;

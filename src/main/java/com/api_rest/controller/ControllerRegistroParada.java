@@ -1,7 +1,7 @@
 package com.api_rest.controller;
 
-import com.api_rest.dto.RegistroParada.RegistroParadaRequestDTO;
-import com.api_rest.dto.RegistroParada.RegistroParadaResponseDTO;
+import com.api_rest.dto.registroParada.RegistroParadaRequestDTO;
+import com.api_rest.dto.registroParada.RegistroParadaResponseDTO;
 import com.api_rest.model.RegistroParadas;
 import com.api_rest.service.ServiceRegistroParada;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +32,7 @@ public class ControllerRegistroParada {
     @PutMapping("/atualizar/{id}")
     public String atualizarRegistroParada(@PathVariable Long id, @RequestBody RegistroParadaRequestDTO dto) {
         RegistroParadaResponseDTO resposta = serviceRegistroParada.atualizarRegistro(id, dto);
-        return "O registro com ID: " + resposta.getId() + ", foi inserido com sucesso!";
+        return "O registro com ID: " + resposta.getId() + ", foi atualizado com sucesso!";
     }
 
     @PatchMapping("/atualizarParcial/{id}")
