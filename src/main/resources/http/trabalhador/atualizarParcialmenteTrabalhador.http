@@ -1,0 +1,9 @@
+### GET request to example server
+PATCH http://localhost:8080/api/trabalhador/atualizarParcial/999
+Content-Type: application/json
+
+{
+  "senha": "132435"
+}
+
+###

@@ -1,0 +1,8 @@
+### GET request to example server
+PATCH http://localhost:8080/api/maquina/atualizarParcial/5
+Content-Type: application/json
+
+{
+  "descricao": "Teste de atualização parcial"
+}
+###

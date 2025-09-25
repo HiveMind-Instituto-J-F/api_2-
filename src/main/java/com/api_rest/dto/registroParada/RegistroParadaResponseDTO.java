@@ -1,7 +1,6 @@
-package com.api_rest.dto.RegistroParada;
+package com.api_rest.dto.registroParada;
 
 import com.api_rest.model.RegistroParadas;
-import org.springframework.http.ResponseEntity;
 
 import java.sql.Time;
 import java.util.Date;
