@@ -1,0 +1,15 @@
+### GET request to example server
+POST http://localhost:8080/api/maquina/inserir
+Content-Type:application/json
+
+{
+  "nome": "maquina1",
+  "descricao": "teste 1",
+  "nivel_confianca": 1,
+  "setor": "setor A",
+  "status_operacional": "quebrada",
+  "tipo": "compressadores de ar"
+
+}
+
+###
