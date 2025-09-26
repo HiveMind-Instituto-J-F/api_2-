@@ -1,0 +1,13 @@
+### GET request to example server
+POST http://localhost:8080/api/registro/inserir
+Content-Type: application/json
+
+{
+  "tipo_parada": "falha",
+  "hora_inicio": {
+
+  }
+
+}
+
+###
