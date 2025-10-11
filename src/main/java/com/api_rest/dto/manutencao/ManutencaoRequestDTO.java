@@ -3,6 +3,8 @@ package com.api_rest.dto.manutencao;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.sql.Date;
+
 public class ManutencaoRequestDTO {
 
     @NotNull(message = "O campo id_maquina é obrigatório")
