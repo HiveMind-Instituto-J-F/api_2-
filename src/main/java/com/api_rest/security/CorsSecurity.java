@@ -14,9 +14,9 @@ public class CorsSecurity {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(@NotNull CorsRegistry registry) {
-                registry.addMapping("/**") // permite todos os endpoints
-                        .allowedOrigins("http://localhost:5173") // domínio do front-end
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                registry.addMapping("/**") // 1. Applies this policy to ALL API paths
+                        .allowedOrigins("http://localhost:5173") // 2. ALLOWS requests ONLY from this origin
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // 3. ALLOWS these HTTP methods
                         .allowedHeaders("*")
                         .allowCredentials(true);
             }

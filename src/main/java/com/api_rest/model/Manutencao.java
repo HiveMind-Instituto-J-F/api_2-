@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+import java.sql.Date;
+
 @Entity
 public class Manutencao {
 
@@ -14,16 +16,19 @@ public class Manutencao {
     private Long id_usuario;
     private String ferramentas_utilizadas;
     private String acao_realizada;
+    private Date date;
 
     public Manutencao() {
+
     }
 
-    public Manutencao(Long id, Long id_maquina, Long id_usuario, String ferramentas_utilizadas, String acao_realizada) {
+    public Manutencao(Long id, Long id_maquina, Long id_usuario, String ferramentas_utilizadas, String acao_realizada, Date date) {
         this.id = id;
         this.id_maquina = id_maquina;
         this.id_usuario = id_usuario;
         this.ferramentas_utilizadas = ferramentas_utilizadas;
         this.acao_realizada = acao_realizada;
+        this.date = date;
     }
 
     public Long getId() {
@@ -64,5 +69,13 @@ public class Manutencao {
 
     public void setAcao_realizada(String acao_realizada) {
         this.acao_realizada = acao_realizada;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
