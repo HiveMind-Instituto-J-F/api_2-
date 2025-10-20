@@ -45,17 +45,30 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
+                // 1. ATIVA O CORS e utiliza a configuração do CorsSecurity
                 .cors(Customizer.withDefaults())
+
+                // 2. DESABILITA CSRF para APIs REST
+                .csrf(csrf -> csrf.disable())
+
                 .authorizeHttpRequests(auth -> auth
+                        // 3. Permite OPTIONS para o Preflight do CORS
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+                        // Garante que todas as rotas de API estejam cobertas com /**
                         .requestMatchers("api/trabalhador/**").hasRole("ADMIN")
                         .requestMatchers("api/firebase/**").hasRole("ADMIN")
                         .requestMatchers("api/registro/**").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("api/manutencao/").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("api/manutencao/**").hasAnyRole("ADMIN", "USER") // Corrigido para cobrir sub-caminhos
                         .anyRequest().authenticated()
                 )
-                .formLogin(Customizer.withDefaults())
+
+                // 4. ATIVA A AUTENTICAÇÃO BÁSICA (leitura do header Authorization)
+                .httpBasic(Customizer.withDefaults())
+
                 .exceptionHandling(exception -> exception
+                        // O Spring Security, por padrão, retorna 401 para falhas de httpBasic,
+                        // mas vamos manter o AccessDeniedHandler para erros 403.
                         .accessDeniedHandler(customAccessDeniedHandler)
                 );
         return httpSecurity.build();
