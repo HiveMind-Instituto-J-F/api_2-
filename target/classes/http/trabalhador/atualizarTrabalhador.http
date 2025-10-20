@@ -1,0 +1,12 @@
+### GET request to example server
+PUT http://localhost:8080/api/trabalhador/atualizar/999
+Content-Type: application/json
+
+{
+  "tipo_perfil": "TESTDEV16",
+  "login": "teste.user2",
+  "senha": "654321",
+  "setor": "Auxiliar de TI"
+}
+
+###

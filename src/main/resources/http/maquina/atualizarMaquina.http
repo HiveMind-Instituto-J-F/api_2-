@@ -1,0 +1,13 @@
+PUT http://localhost:8080/api/maquina/atualizar/5
+Content-Type: application/json
+
+{
+  "nome": "maquina5",
+  "tipo": "empilhadeiras",
+  "setor": "Setor C",
+  "descricao": "Teste de atualização",
+  "status_operacional": "muito quebrada",
+  "nivel_confianca": 5
+}
+
+###
