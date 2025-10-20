@@ -17,7 +17,7 @@ public class CorsSecurity {
                 registry.addMapping("/**") // 1. Applies this policy to ALL API paths
                         .allowedOrigins("http://localhost:5173") // 2. ALLOWS requests ONLY from this origin
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // 3. ALLOWS these HTTP methods
-                        .allowedHeaders("*")
+                        .allowedHeaders("*", "Authorization")
                         .allowCredentials(true);
             }
         };
