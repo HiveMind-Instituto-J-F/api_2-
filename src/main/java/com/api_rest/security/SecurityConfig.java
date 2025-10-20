@@ -1,5 +1,6 @@
 package com.api_rest.security;
 
+import org.springframework.http.HttpMethod;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -45,6 +46,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("api/trabalhador/**").hasRole("ADMIN")
                         .requestMatchers("api/firebase/**").hasRole("ADMIN")
                         .requestMatchers("api/registro/**").hasAnyRole("ADMIN", "USER")
