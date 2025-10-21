@@ -15,7 +15,7 @@ public class CorsSecurity {
             @Override
             public void addCorsMappings(@NotNull CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173", "https://area-restrita-5xoh.onrender.com/") // Add production domain
+                        .allowedOrigins("http://localhost:5173", "https://area-restrita-5xoh.onrender.com") // Add production domain
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*", "Authorization")
                         .allowCredentials(true);
