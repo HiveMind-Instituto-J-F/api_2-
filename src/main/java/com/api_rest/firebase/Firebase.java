@@ -17,7 +17,7 @@ public class Firebase {
         System.out.println("=== INICIANDO CONEXÃO FIREBASE ===");
 
         try {
-            InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream("hivemind-fb-mdb-dataset-firebase-adminsdk-fbsvc-f072f90534.json");
+            InputStream serviceAccount = new FileInputStream("src/main/resources/hivemind-fb-mdb-dataset-firebase-adminsdk-fbsvc-531ff2e017.json") ;
             GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
 
             FirebaseOptions options = new FirebaseOptions.Builder()
