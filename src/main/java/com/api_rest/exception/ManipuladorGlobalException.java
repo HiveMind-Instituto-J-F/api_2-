@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
 @RestControllerAdvice
 public class ManipuladorGlobalException {
     @ExceptionHandler(MethodArgumentNotValidException.class)
