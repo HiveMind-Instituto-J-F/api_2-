@@ -22,3 +22,11 @@ rad.json
 TestResults.xml
 #Enviroment variables
 *.env
+# IDE
+.idea/
+# Firebase credentials
+*-firebase-adminsdk-*.json
+# Target (compilados)
+target/
+# Estrutura duplicada (problema do src/src/)
+src/src/
