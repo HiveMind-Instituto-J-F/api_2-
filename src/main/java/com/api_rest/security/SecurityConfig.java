@@ -56,10 +56,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                         // Garante que todas as rotas de API estejam cobertas com /**
-                        .requestMatchers("api/trabalhador/**").hasRole("ADMIN")
-                        .requestMatchers("api/firebase/**").hasRole("ADMIN")
-                        .requestMatchers("api/registro/**").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("api/manutencao/**").hasAnyRole("ADMIN", "USER") // Corrigido para cobrir sub-caminhos
+                        .requestMatchers("/api/trabalhador/**").hasRole("ADMIN")
+                        .requestMatchers("/api/firebase/**").hasRole("ADMIN")
+                        .requestMatchers("/api/registro/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/api/manutencao/**").hasAnyRole("ADMIN", "USER") // Corrigido para cobrir sub-caminhos
                         .anyRequest().authenticated()
                 )
 
