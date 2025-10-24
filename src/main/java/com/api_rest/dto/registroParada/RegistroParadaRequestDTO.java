@@ -78,7 +78,7 @@ public class RegistroParadaRequestDTO {
         this.id_usuario = id_usuario;
     }
 
-    public java.sql.Date getDate() {
+    public Date getDate() {
         return date;
     }
 
