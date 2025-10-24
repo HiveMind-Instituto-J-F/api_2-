@@ -3,26 +3,36 @@ package com.api_rest.firebase;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 @Configuration
 public class Firebase {
-    Dotenv env = Dotenv.load();
 
     @PostConstruct
     public void firebaseDatabase() {
         System.out.println("=== INICIANDO CONEXÃO FIREBASE ===");
-        String filePath = env.get("GOOGLE_APPLICATION_CREDENTIALS");
+
         try {
-            InputStream serviceAccount = new FileInputStream(filePath);
+            // Lê a variável de ambiente configurada no Render
+            String serviceAccountPath = System.getenv("GOOGLE_APPLICATION_CREDENTIALS");
+
+            InputStream serviceAccount;
+
+            if (serviceAccountPath != null && !serviceAccountPath.isEmpty()) {
+                serviceAccount = new FileInputStream(serviceAccountPath);
+            } else {
+                throw new RuntimeException("Nenhuma credencial do Firebase configurada!");
+            }
+
             GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
 
-            FirebaseOptions options = new FirebaseOptions.Builder()
+            FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(credentials)
                     .build();
 
