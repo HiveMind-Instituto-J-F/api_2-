@@ -6,6 +6,7 @@ import com.api_rest.model.Trabalhador;
 import com.api_rest.repository.RepositoryTrabalhador;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class ServiceTrabalhador {
     ObjectMapper objectMapper;
     FirebaseSyncService firebaseSyncService;
 
-    public ServiceTrabalhador(RepositoryTrabalhador repository, ObjectMapper mapper, FirebaseSyncService firebaseSyncService) {
+    public ServiceTrabalhador(RepositoryTrabalhador repository, ObjectMapper mapper, @Lazy FirebaseSyncService firebaseSyncService) {
         this.repository = repository;
         this.objectMapper = mapper;
         this.firebaseSyncService = firebaseSyncService;

@@ -14,7 +14,7 @@ import java.io.InputStream;
 public class Firebase {
     Dotenv env = Dotenv.load();
 
-    @PostConstruct // ✅ Executa após a inicialização do bean
+    @PostConstruct
     public void firebaseDatabase() {
         System.out.println("=== INICIANDO CONEXÃO FIREBASE ===");
         String filePath = env.get("GOOGLE_APPLICATION_CREDENTIALS");

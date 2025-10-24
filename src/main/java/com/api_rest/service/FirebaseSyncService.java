@@ -6,6 +6,7 @@ import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.Query;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -22,8 +23,12 @@ public class FirebaseSyncService {
     @Autowired
     private Firestore firestore;
 
-    @Autowired
     private ServiceTrabalhador serviceTrabalhador;
+
+    @Autowired
+    public void setServiceTrabalhador(@Lazy ServiceTrabalhador serviceTrabalhador) {
+        this.serviceTrabalhador = serviceTrabalhador;
+    }
 
     @Async
     public CompletableFuture<String> syncTrabalhadorToFirebase(Trabalhador trabalhador) {
