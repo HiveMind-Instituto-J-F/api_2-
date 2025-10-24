@@ -2,7 +2,6 @@ package com.api_rest.controller;
 
 import com.api_rest.service.ServiceFirebase;
 import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.ListUsersPage;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +20,7 @@ public class ControllerFirebase {
 
     @GetMapping("listar")
     public List<String> listar() throws FirebaseAuthException {
-        return service.listar();
+        return service.listarIds();
     }
 
 

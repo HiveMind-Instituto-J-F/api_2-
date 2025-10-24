@@ -4,11 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdb0d51d-3528-4865-abe1-79bca43d9f32" name="Changes" comment="" />
+    <list default="true" id="bdb0d51d-3528-4865-abe1-79bca43d9f32" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/model/Login.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/repository/RepositoryLogin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/service/ServiceLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/controller/ControllerFirebase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/controller/ControllerFirebase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/firebase/Firebase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/firebase/Firebase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/service/ServiceFirebase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/service/ServiceFirebase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/controller/ControllerFirebase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/controller/ControllerFirebase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/exception/ManipuladorGlobalException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/exception/ManipuladorGlobalException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/firebase/Firebase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/firebase/Firebase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/security/CorsSecurity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/security/CorsSecurity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/service/ServiceFirebase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/service/ServiceFirebase.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -25,11 +47,15 @@
     &quot;accountId&quot;: &quot;e1d7cae4-8eaa-4110-a2bc-03e813fb2d25&quot;
   }
 }</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="34L5QOmKUrFig0BLlSiOcY47n1g" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -86,5 +112,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/api_rest/firebase/Firebase.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
