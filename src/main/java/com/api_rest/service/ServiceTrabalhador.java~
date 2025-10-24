@@ -88,18 +88,4 @@ public class ServiceTrabalhador {
         firebaseSyncService.deleteTrabalhadorFromFirebase(id);
         return objectMapper.convertValue(tr, TrabalhadorResponseDTO.class);
     }
-
-    public Trabalhador buscarTrabalhadorPorLogin(String login) {
-        return repository.findByLogin(login)
-                .orElseThrow(() -> new EntityNotFoundException("Trabalhador não encontrado com login: " + login));
-    }
-
-    public boolean autenticarTrabalhador(String login, String senha) {
-        try {
-            Trabalhador trabalhador = buscarTrabalhadorPorLogin(login);
-            return trabalhador.getSenha().equals(senha);
-        } catch (EntityNotFoundException e) {
-            return false;
-        }
-    }
 }
