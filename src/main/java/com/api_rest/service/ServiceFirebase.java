@@ -1,28 +1,55 @@
 package com.api_rest.service;
 
-import com.google.cloud.firestore.Firestore;
-import com.google.firebase.auth.ExportedUserRecord;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.ListUsersPage;
-import com.google.firebase.cloud.FirestoreClient;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.api_rest.model.Login;
+import com.google.firebase.auth.*;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ServiceFirebase {
-    public List<String> listar() throws FirebaseAuthException {
+
+    private final ServiceLogin serviceLogin;
+
+    public ServiceFirebase(ServiceLogin serviceLogin){
+        this.serviceLogin = serviceLogin;
+    }
+
+    public UserRecord.CreateRequest criarUsuario(String email, String senha) {
+        UserRecord.CreateRequest request = new UserRecord.CreateRequest()
+                .setEmail(email)
+                .setPassword(senha);
+        return request;
+    }
+    public List<String> listarIds() throws FirebaseAuthException {
         ListUsersPage page = FirebaseAuth.getInstance().listUsers(null);
         List<String> users = new ArrayList<>();
         for (ExportedUserRecord user : page.iterateAll()) {
             users.add(user.getUid());
         }
         return users;
+    }
+
+    public UserRecord enviarDadosFirebase() throws FirebaseAuthException {
+        List<Login> login = serviceLogin.listarUsuarios();
+        ListUsersPage page = FirebaseAuth.getInstance().listUsers(null);
+        List<ExportedUserRecord> pages = (List<ExportedUserRecord>) page.getValues();
+
+        if (!pages.isEmpty()) {
+            for (int i = 0; i <= pages.size(); i++) {
+                if (login.get(i).getEmail().equals(pages.get(i).getEmail())) {
+                    login.remove(i);
+                }
+            }
+        }
+
+        UserRecord resposta = null;
+        for (int i = 0; i <= login.size(); i++) {
+            UserRecord.CreateRequest user = criarUsuario(login.get(i).getEmail(), login.get(i).getSenha());
+            resposta = FirebaseAuth.getInstance().createUser(user);
+        }
+
+        return resposta;
     }
 
 }
