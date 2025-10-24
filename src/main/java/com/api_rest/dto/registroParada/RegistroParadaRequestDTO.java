@@ -3,7 +3,7 @@ package com.api_rest.dto.registroParada;
 import jakarta.validation.constraints.NotNull;
 
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 public class RegistroParadaRequestDTO {
     @NotNull
