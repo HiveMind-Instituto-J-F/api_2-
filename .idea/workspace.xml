@@ -80,6 +80,7 @@
     "Spring Boot.ApiRestApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/danielsousa-ieg/inter/api_2-",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -89,6 +90,10 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\danielsousa-ieg\inter\api_2-" />
+      <recent name="C:\Users\danielsousa-ieg\inter\api_2-\src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\danielsousa-ieg\inter\api_2-\src\main\resources" />
     </key>
@@ -137,7 +142,7 @@
       <workItem from="1761055200813" duration="41000" />
       <workItem from="1761055438485" duration="2395000" />
       <workItem from="1761216731912" duration="92000" />
-      <workItem from="1761312339309" duration="4450000" />
+      <workItem from="1761312339309" duration="7128000" />
     </task>
     <servers />
   </component>
