@@ -9,15 +9,18 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class ServiceTrabalhador {
     RepositoryTrabalhador repository;
     ObjectMapper objectMapper;
+    FirebaseSyncService firebaseSyncService;
 
-    public ServiceTrabalhador(RepositoryTrabalhador repository, ObjectMapper mapper) {
+    public ServiceTrabalhador(RepositoryTrabalhador repository, ObjectMapper mapper, FirebaseSyncService firebaseSyncService) {
         this.repository = repository;
         this.objectMapper = mapper;
+        this.firebaseSyncService = firebaseSyncService;
     }
 
     public List<Trabalhador> listarTrabalhadores() {
@@ -31,8 +34,10 @@ public class ServiceTrabalhador {
 
     public TrabalhadorResponseDTO inserirTrabalhador(TrabalhadorRequestDTO trabalhadorRequestDTO){
         Trabalhador trabalhador = objectMapper.convertValue(trabalhadorRequestDTO, Trabalhador.class);
-        repository.save(trabalhador);
-        return objectMapper.convertValue(trabalhador, TrabalhadorResponseDTO.class);
+        Trabalhador trabalhadorSalvo = repository.save(trabalhador);
+        CompletableFuture<String> syncResult = firebaseSyncService.syncTrabalhadorToFirebase(trabalhadorSalvo);
+        syncResult.thenAccept(result -> System.out.println("Firebase Sync: " + result));
+        return objectMapper.convertValue(trabalhadorSalvo, TrabalhadorResponseDTO.class);
     }
 
     public TrabalhadorResponseDTO atualizarTrabalhador(Long id, TrabalhadorRequestDTO trabalhadorRequestDTO){
@@ -45,6 +50,9 @@ public class ServiceTrabalhador {
         trabalhadorExistente.setTipo_perfil(trabalhadorRequestDTO.getTipo_perfil());
 
         Trabalhador trabalhador = repository.save(trabalhadorExistente);
+
+        firebaseSyncService.syncTrabalhadorToFirebase(trabalhador);
+
         return objectMapper.convertValue(trabalhador, TrabalhadorResponseDTO.class);
     }
 
@@ -63,17 +71,35 @@ public class ServiceTrabalhador {
             trabalhadorExitente.setSetor(trabalhadorRequestDTO.getTipo_perfil());
         }
 
-        if (trabalhadorExitente.getTipo_perfil() == null) {
-            trabalhadorExitente.setTipo_perfil(trabalhadorRequestDTO.getSetor());
+        if (trabalhadorExitente.getSetor() == null) {
+            trabalhadorExitente.setSetor(trabalhadorRequestDTO.getSetor());
         }
 
         Trabalhador trabalhador = repository.save(trabalhadorExitente);
+
+        firebaseSyncService.syncTrabalhadorToFirebase(trabalhador);
+
         return objectMapper.convertValue(trabalhador, TrabalhadorResponseDTO.class);
     }
 
     public TrabalhadorResponseDTO excluirTrabalhador(Long id){
         Trabalhador tr = buscarTrabalhadorPorId(id);
         repository.delete(tr);
+        firebaseSyncService.deleteTrabalhadorFromFirebase(id);
         return objectMapper.convertValue(tr, TrabalhadorResponseDTO.class);
+    }
+
+    public Trabalhador buscarTrabalhadorPorLogin(String login) {
+        return repository.findByLogin(login)
+                .orElseThrow(() -> new EntityNotFoundException("Trabalhador não encontrado com login: " + login));
+    }
+
+    public boolean autenticarTrabalhador(String login, String senha) {
+        try {
+            Trabalhador trabalhador = buscarTrabalhadorPorLogin(login);
+            return trabalhador.getSenha().equals(senha);
+        } catch (EntityNotFoundException e) {
+            return false;
+        }
     }
 }

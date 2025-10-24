@@ -69,7 +69,6 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/joasoliveira-ieg/OneDrive - Instituto J&F/Área de Trabalho/Interdiciplinar/api_2-/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -78,11 +77,6 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\joasoliveira-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Interdiciplinar\api_2-\src\main\resources" />
-    </key>
-  </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="api_2-" />
@@ -113,7 +107,6 @@
       <workItem from="1761055200813" duration="41000" />
       <workItem from="1761055438485" duration="2395000" />
       <workItem from="1761216731912" duration="92000" />
-      <workItem from="1760990241103" duration="3507000" />
     </task>
     <servers />
   </component>
