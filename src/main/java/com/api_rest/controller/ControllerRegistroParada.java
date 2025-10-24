@@ -29,6 +29,18 @@ public class ControllerRegistroParada {
         return "O registro foi inserido, com ID: " + resposta.getId() + ", com sucesso!";
     }
 
+    @PostMapping("/inserirProcedure")
+    public String inserirRegistroParadaProcedure(@RequestBody RegistroParadaRequestDTO dto) {
+        RegistroParadaResponseDTO resposta = serviceRegistroParada.inserirRegistroProcedure(dto);
+        return "O registro foi inserido com sucesso!";
+    }
+
+    @PostMapping("/inserirFunction")
+    public String inserirRegistroParadaFunction(@RequestBody RegistroParadaRequestDTO dto) {
+        RegistroParadaResponseDTO resposta = serviceRegistroParada.inserirRegistroFunction(dto);
+        return "O registro foi inserido com sucesso!";
+    }
+
     @PutMapping("/atualizar/{id}")
     public String atualizarRegistroParada(@PathVariable Long id, @RequestBody RegistroParadaRequestDTO dto) {
         RegistroParadaResponseDTO resposta = serviceRegistroParada.atualizarRegistro(id, dto);
