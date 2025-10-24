@@ -4,20 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdb0d51d-3528-4865-abe1-79bca43d9f32" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/model/Login.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/repository/RepositoryLogin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/service/ServiceLogin.java" afterDir="false" />
+    <list default="true" id="bdb0d51d-3528-4865-abe1-79bca43d9f32" name="Changes" comment="Comitando a nova versão da API SQL, com novas funcionalidades para mexer no Firebase.class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/controller/ControllerFirebase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/controller/ControllerFirebase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/firebase/Firebase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/firebase/Firebase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/service/ServiceFirebase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/service/ServiceFirebase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/controller/ControllerFirebase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/controller/ControllerFirebase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/exception/ManipuladorGlobalException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/exception/ManipuladorGlobalException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/firebase/Firebase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/firebase/Firebase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/security/CorsSecurity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/security/CorsSecurity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/service/ServiceFirebase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/service/ServiceFirebase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/ApiRestApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/controller/ChatController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/controller/ControllerFirebase.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/controller/ControllerManutencao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/controller/ControllerMaquina.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/controller/ControllerRegistroParada.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/controller/ControllerTrabalhador.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/dto/manutencao/ManutencaoRequestDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/dto/manutencao/ManutencaoResponseDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/dto/maquina/MaquinaRequestDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/dto/maquina/MaquinaResponseDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/dto/registroParada/RegistroParadaRequestDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/dto/registroParada/RegistroParadaResponseDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/dto/trabalhador/TrabalhadorRequestDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/dto/trabalhador/TrabalhadorResponseDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/exception/ManipuladorGlobalException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/firebase/Firebase.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/model/Manutencao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/model/Maquina.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/model/ModelFirestore.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/model/RegistroParadas.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/model/Trabalhador.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/repository/RepositoryManutencao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/repository/RepositoryMaquina.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/repository/RepositoryRegistroParada.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/repository/RepositoryTrabalhador.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/security/CorsSecurity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/service/ServiceFirebase.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/service/ServiceManutencao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/service/ServiceMaquina.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/service/ServiceRegistroParada.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/service/ServiceTrabalhador.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +54,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="minha-feature" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -75,11 +101,40 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/joasoliveira-ieg/OneDrive - Instituto J&amp;F/Área de Trabalho/Interdiciplinar/api_2-/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\joasoliveira-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Interdiciplinar\api_2-\src\main\resources" />
+    </key>
+  </component>
 }]]></component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="api_2-" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ApiRestApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="API_Rest" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.api_rest.ApiRestApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
