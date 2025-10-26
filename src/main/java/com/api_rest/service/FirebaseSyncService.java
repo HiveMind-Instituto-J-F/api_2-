@@ -26,7 +26,7 @@ public class FirebaseSyncService {
     private ServiceTrabalhador serviceTrabalhador;
 
     @Autowired
-    public void setServiceTrabalhador(@Lazy ServiceTrabalhador serviceTrabalhador) {
+    public void setServiceTrabalhador(ServiceTrabalhador serviceTrabalhador) {
         this.serviceTrabalhador = serviceTrabalhador;
     }
 

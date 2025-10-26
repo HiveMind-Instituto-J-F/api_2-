@@ -47,6 +47,10 @@
     &quot;accountId&quot;: &quot;e1d7cae4-8eaa-4110-a2bc-03e813fb2d25&quot;
   }
 }</component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -143,7 +147,7 @@
       <workItem from="1761055438485" duration="2395000" />
       <workItem from="1761216731912" duration="92000" />
       <workItem from="1761312339309" duration="7888000" />
-      <workItem from="1761324929662" duration="343000" />
+      <workItem from="1761324929662" duration="3066000" />
     </task>
     <servers />
   </component>

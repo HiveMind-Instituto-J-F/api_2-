@@ -29,7 +29,7 @@ public class FirebaseConfig {
             if (!serviceAccountPath.isEmpty()) {
                 serviceAccount = new FileInputStream(serviceAccountPath);
             } else {
-                throw new RuntimeException("Nenhuma credencial do Firebase configurada. Configure FIREBASE_SERVICE_ACCOUNT_PATH ou FIREBASE_SERVICE_ACCOUNT_JSON");
+                throw new RuntimeException("Nenhuma credencial do Firebase configurada.");
             }
 
             FirebaseOptions options = FirebaseOptions.builder()
