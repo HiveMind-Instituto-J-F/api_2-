@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "617788565726",
-    "project_id": "testeparadas-c60ce",
-    "storage_bucket": "testeparadas-c60ce.firebasestorage.app"
+    "project_number": "57492015513",
+    "project_id": "loginapphivemind",
+    "storage_bucket": "loginapphivemind.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:617788565726:android:cede2f31249a9da0aa3a4f",
+        "mobilesdk_app_id": "1:57492015513:android:9998d9de6c5634e43eab08",
         "android_client_info": {
           "package_name": "com.aula.mobile_hivemind"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB1wvplTO6ocn0E4_dhnI75XubpvlwP8cM"
+          "current_key": "AIzaSyAjzMgOUfFojhORe09pZtziEt5yVPbmTnk"
         }
       ],
       "services": {

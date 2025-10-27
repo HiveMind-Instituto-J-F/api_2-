@@ -1,5 +1,6 @@
 package com.aula.mobile_hivemind.ui.home.paradas;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +26,7 @@ import com.aula.mobile_hivemind.dto.RegistroParadaRequestDTO;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -44,10 +47,13 @@ public class AddParadaFragment extends Fragment {
     private EditText idMaquina;
     private EditText nomeMaquina;
     private EditText codigoColaborador;
-    private EditText setor;
+    private TextView setor;
     private EditText descricaoParada;
     private EditText editTextDATAPARADA;
     private com.aula.mobile_hivemind.api.ApiService apiService;
+
+    private FirebaseFirestore db;
+    private String userSetor;
 
     public AddParadaFragment() {}
 
@@ -61,18 +67,62 @@ public class AddParadaFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Inicializar API Service
         apiService = RetrofitClient.getApiService();
+        db = FirebaseFirestore.getInstance();
 
         hideFab();
+        inicializarViews(view);
+        carregarSetorUsuario(); // 🔧 CARREGA O SETOR DO USUÁRIO
+        configurarDatePicker();
+        configurarBotoes();
+    }
 
+    private void inicializarViews(View view) {
         idMaquina = view.findViewById(R.id.editIdMaquina);
         nomeMaquina = view.findViewById(R.id.editNomeMaquina);
         codigoColaborador = view.findViewById(R.id.editCodigoColaborador);
-        setor = view.findViewById(R.id.editSetor);
+        setor = view.findViewById(R.id.textSetor);
         descricaoParada = view.findViewById(R.id.editDescricaoParada);
         editTextDATAPARADA = view.findViewById(R.id.editTextDATAPARADA);
+        btnBack = view.findViewById(R.id.btnBack);
+        btnAdicionarParada = view.findViewById(R.id.btnAdicionarParada);
 
+        setor.setText("Carregando setor...");
+    }
+
+    // 🔧 MÉTODO SIMPLES: CARREGA O SETOR DO USUÁRIO LOGADO
+    private void carregarSetorUsuario() {
+        // Pega o email do usuário logado do SharedPreferences
+        SharedPreferences prefs = requireContext().getSharedPreferences("ProfilePrefs", 0);
+        String userEmail = prefs.getString("user_email", "");
+
+        if (userEmail.isEmpty()) {
+            setor.setText("Usuário não logado");
+            return;
+        }
+
+        // Busca o usuário no Firestore
+        db.collection("trabalhadores")
+                .whereEqualTo("login", userEmail)
+                .limit(1)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                        userSetor = task.getResult().getDocuments().get(0).getString("setor");
+
+                        if (userSetor != null && !userSetor.isEmpty()) {
+                            setor.setText(userSetor);
+                            Log.d("AddParadaFragment", "Setor carregado: " + userSetor);
+                        } else {
+                            setor.setText("Setor não definido");
+                        }
+                    } else {
+                        setor.setText("Usuário não encontrado");
+                    }
+                });
+    }
+
+    private void configurarDatePicker() {
         editTextDATAPARADA.setFocusable(false);
         editTextDATAPARADA.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -81,16 +131,11 @@ public class AddParadaFragment extends Fragment {
             }
             return false;
         });
+    }
 
-        btnBack = view.findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(v -> {
-            navigateBack();
-        });
-
-        btnAdicionarParada = view.findViewById(R.id.btnAdicionarParada);
-        btnAdicionarParada.setOnClickListener(v -> {
-            salvarParada();
-        });
+    private void configurarBotoes() {
+        btnBack.setOnClickListener(v -> navigateBack());
+        btnAdicionarParada.setOnClickListener(v -> salvarParada());
     }
 
     @Override
@@ -106,16 +151,8 @@ public class AddParadaFragment extends Fragment {
         }
     }
 
-    private void showFab() {
-        if (getActivity() instanceof MainActivity) {
-            ((MainActivity) getActivity()).setFabVisibility(true);
-            ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
-        }
-    }
-
     private void navigateBack() {
         showFab();
-
         try {
             NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
             navController.popBackStack();
@@ -123,6 +160,13 @@ public class AddParadaFragment extends Fragment {
             if (getActivity() != null) {
                 getActivity().onBackPressed();
             }
+        }
+    }
+
+    private void showFab() {
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).setFabVisibility(true);
+            ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
         }
     }
 
@@ -134,7 +178,6 @@ public class AddParadaFragment extends Fragment {
         calendar.set(Calendar.MILLISECOND, 0);
         long today = calendar.getTimeInMillis();
 
-        // Constraints para permitir datas até hoje
         CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder();
         constraintsBuilder.setEnd(today);
 
@@ -160,39 +203,26 @@ public class AddParadaFragment extends Fragment {
 
     private void salvarParada() {
         try {
-            if (idMaquina == null || nomeMaquina == null || codigoColaborador == null || setor == null || descricaoParada == null || editTextDATAPARADA == null) {
-                Toast.makeText(requireContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-                return;
-            }
+            if (!validarCampos()) return;
 
-            String idMaquinaStr = idMaquina.getText().toString().trim();
-            String nomeMaquinaText = nomeMaquina.getText().toString().trim();
-            String codigoColaboradorStr = codigoColaborador.getText().toString().trim();
             String setorText = setor.getText().toString().trim();
-            String descricaoParadaText = descricaoParada.getText().toString().trim();
-            String dataParadaText = editTextDATAPARADA.getText().toString().trim();
 
-            if (idMaquinaStr.isEmpty() || codigoColaboradorStr.isEmpty()) {
-                Toast.makeText(requireContext(), "ID Máquina e Código Colaborador são obrigatórios", Toast.LENGTH_SHORT).show();
+            // Só permite salvar se o setor foi carregado corretamente
+            if (setorText.equals("Carregando setor...") ||
+                    setorText.equals("Usuário não logado") ||
+                    setorText.equals("Usuário não encontrado") ||
+                    setorText.equals("Setor não definido")) {
+                Toast.makeText(requireContext(), "Aguarde o setor ser carregado", Toast.LENGTH_LONG).show();
                 return;
             }
 
-            Integer idMaquinaText = Integer.parseInt(idMaquinaStr);
-            Integer codigoColaboradorText = Integer.parseInt(codigoColaboradorStr);
-
-            if (nomeMaquinaText.isEmpty() || setorText.isEmpty() || descricaoParadaText.isEmpty() || dataParadaText.isEmpty()) {
-                Toast.makeText(requireContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            // Criar DTO para a API MongoDB
             RegistroParadaRequestDTO requestDTO = new RegistroParadaRequestDTO(
-                    idMaquinaText,         // id_maquina
-                    nomeMaquinaText,       // nomeMaquina
-                    codigoColaboradorText, // id_usuario (usando código colaborador como ID)
-                    setorText,             // setor
-                    descricaoParadaText,   // descricao
-                    dataParadaText         // date
+                    Integer.parseInt(idMaquina.getText().toString().trim()),
+                    nomeMaquina.getText().toString().trim(),
+                    Integer.parseInt(codigoColaborador.getText().toString().trim()),
+                    setorText, // 🔧 SETOR DO USUÁRIO (automático)
+                    descricaoParada.getText().toString().trim(),
+                    editTextDATAPARADA.getText().toString().trim()
             );
 
             salvarNoMongoDB(requestDTO);
@@ -201,6 +231,30 @@ public class AddParadaFragment extends Fragment {
         } catch (Exception e) {
             Toast.makeText(requireContext(), "Erro ao salvar parada", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private boolean validarCampos() {
+        if (idMaquina.getText().toString().trim().isEmpty()) {
+            Toast.makeText(requireContext(), "ID da Máquina é obrigatório", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (nomeMaquina.getText().toString().trim().isEmpty()) {
+            Toast.makeText(requireContext(), "Nome da Máquina é obrigatório", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (codigoColaborador.getText().toString().trim().isEmpty()) {
+            Toast.makeText(requireContext(), "Código do Colaborador é obrigatório", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (descricaoParada.getText().toString().trim().isEmpty()) {
+            Toast.makeText(requireContext(), "Descrição da Parada é obrigatória", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (editTextDATAPARADA.getText().toString().trim().isEmpty()) {
+            Toast.makeText(requireContext(), "Data da Parada é obrigatória", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     private void salvarNoMongoDB(RegistroParadaRequestDTO requestDTO) {
@@ -214,30 +268,17 @@ public class AddParadaFragment extends Fragment {
                 btnAdicionarParada.setEnabled(true);
                 btnAdicionarParada.setText("Adicionar Parada");
 
-
-                Log.d("API_RESPONSE", "Status Code: " + response.code());
-
                 if (response.isSuccessful()) {
-                    String rawResponse = null;
-                    try {
-                        rawResponse = response.body() != null ? response.body().string() : "Resposta vazia";
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    Log.d("API_RESPONSE", "Raw Response: " + rawResponse);
-
-//                    Toast.makeText(requireContext(), rawResponse, Toast.LENGTH_SHORT).show();
-
                     limparCampos();
+                    Toast.makeText(requireContext(), "Parada salva com sucesso!", Toast.LENGTH_SHORT).show();
 
                     try {
-                        NavHostFragment.findNavController(AddParadaFragment.this)
-                                .navigate(R.id.confirmationFragment);
+                        NavHostFragment.findNavController(AddParadaFragment.this).navigate(R.id.confirmationFragment);
                     } catch (Exception e) {
                         navigateBack();
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Erro ao salvar parada: " + response.code(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Erro ao salvar parada", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -245,9 +286,7 @@ public class AddParadaFragment extends Fragment {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 btnAdicionarParada.setEnabled(true);
                 btnAdicionarParada.setText("Adicionar Parada");
-
-                Log.e("API_ERROR", "Falha na conexão: ", t);
-                Toast.makeText(requireContext(), "Falha na conexão: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(requireContext(), "Falha na conexão", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -256,7 +295,6 @@ public class AddParadaFragment extends Fragment {
         idMaquina.setText("");
         nomeMaquina.setText("");
         codigoColaborador.setText("");
-        setor.setText("");
         descricaoParada.setText("");
         editTextDATAPARADA.setText("");
     }

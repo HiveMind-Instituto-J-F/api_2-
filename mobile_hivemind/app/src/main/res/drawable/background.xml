@@ -21,7 +21,7 @@
     <path
         android:pathData="M-1,109h375v80h-375z">
       <aapt:attr name="android:fillColor">
-        <gradient 
+        <gradient
             android:startX="186.52"
             android:startY="109"
             android:endX="186.11"

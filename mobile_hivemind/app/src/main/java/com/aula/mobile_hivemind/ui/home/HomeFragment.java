@@ -2,7 +2,9 @@ package com.aula.mobile_hivemind.ui.home;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,7 @@ import com.aula.mobile_hivemind.recyclerViewParadas.ParadaAdapter;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -47,6 +50,12 @@ public class HomeFragment extends Fragment {
     private List<Parada> allParadasList;
     private com.aula.mobile_hivemind.api.ApiService apiService;
 
+    private FirebaseFirestore db;
+    private SharedPreferences sharedPreferences;
+    private String userEmail;
+    private String userType;
+    private String userSetor;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,6 +74,10 @@ public class HomeFragment extends Fragment {
         // Inicializar API Service
         apiService = RetrofitClient.getApiService();
 
+        // Inicializar Firestore e SharedPreferences
+        db = FirebaseFirestore.getInstance();
+        sharedPreferences = requireContext().getSharedPreferences("ProfilePrefs", 0);
+
         // Inicializar listas
         paradasList = new ArrayList<>();
         allParadasList = new ArrayList<>();
@@ -79,11 +92,18 @@ public class HomeFragment extends Fragment {
 
         recyclerViewParadas.setAdapter(paradaAdapter);
 
-        carregarParadas();
+        // 🔧 OBTER INFORMAÇÕES DO USUÁRIO PRIMEIRO
+        obterInformacoesUsuarioECarregarParadas();
 
         filtrarParadas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 🔧 SE FOR OPERADOR, NÃO MOSTRA FILTRO (APENAS SEU SETOR)
+                if ("regular".equals(userType)) {
+                    Toast.makeText(getContext(), "Operador: Visualizando apenas paradas do setor " + userSetor, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (chipGroupSetores.getVisibility() == View.GONE) {
                     chipGroupSetores.setVisibility(View.VISIBLE);
                 } else {
@@ -93,6 +113,64 @@ public class HomeFragment extends Fragment {
         });
 
         chipGroupSetores.setVisibility(View.GONE);
+    }
+
+    private void obterInformacoesUsuarioECarregarParadas() {
+        // 🔧 PRIMEIRO TENTA OBTER O USER_TYPE DA MAIN ACTIVITY
+        if (getActivity() instanceof MainActivity) {
+            userType = ((MainActivity) getActivity()).getUserType();
+            Log.d("HomeFragment", "UserType da MainActivity: " + userType);
+        }
+
+        userEmail = sharedPreferences.getString("user_email", null);
+
+        if (userEmail != null && !userEmail.isEmpty()) {
+            db.collection("trabalhadores")
+                    .whereEqualTo("login", userEmail)
+                    .limit(1)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                            String tipoPerfilOriginal = task.getResult().getDocuments().get(0).getString("tipo_perfil");
+                            userSetor = task.getResult().getDocuments().get(0).getString("setor");
+
+                            // 🔧 SE USER_TYPE NÃO VEIO DA MAIN ACTIVITY, MAPEAR AQUI
+                            if (userType == null && tipoPerfilOriginal != null) {
+                                switch (tipoPerfilOriginal.toLowerCase()) {
+                                    case "operador":
+                                        userType = "regular";
+                                        break;
+                                    case "engenheiro":
+                                        userType = "MOP";
+                                        break;
+                                    case "supervisor":
+                                        userType = "RH";
+                                        break;
+                                    default:
+                                        userType = "regular";
+                                }
+                            }
+
+                            Log.d("HomeFragment", "Usuário: " + userEmail + ", Tipo: " + userType + ", Setor: " + userSetor);
+
+                            // 🔧 AGORA CARREGAR PARADAS COM FILTRO APROPRIADO
+                            carregarParadas();
+
+                        } else {
+                            Log.e("HomeFragment", "Usuário não encontrado no Firestore");
+                            // 🔧 SE NÃO ENCONTROU NO FIRESTORE, USA O USER_TYPE DA MAIN ACTIVITY
+                            carregarParadas();
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e("HomeFragment", "Erro ao buscar usuário: " + e.getMessage());
+                        // 🔧 EM CASO DE ERRO, USA O USER_TYPE DA MAIN ACTIVITY
+                        carregarParadas();
+                    });
+        } else {
+            Log.e("HomeFragment", "Email do usuário não disponível");
+            carregarParadas();
+        }
     }
 
     @Override
@@ -143,26 +221,27 @@ public class HomeFragment extends Fragment {
                     // Converter RegistroParadaResponseDTO para Parada
                     for (RegistroParadaResponseDTO registro : response.body()) {
                         Parada parada = converterParaParada(registro);
-                        paradasList.add(parada);
                         allParadasList.add(parada);
                     }
 
-                    paradaAdapter.notifyDataSetChanged();
+                    // 🔧 APLICAR FILTRO BASEADO NO TIPO DE USUÁRIO
+                    aplicarFiltroUsuario();
 
-                    // Extrair setores únicos e adicionar chips
-                    Set<String> setores = new HashSet<>();
-                    for (Parada parada : paradasList) {
-                        if (parada.getSetor() != null && !parada.getSetor().isEmpty()) {
-                            setores.add(parada.getSetor()); // Usa o setor real da API
+                    // 🔧 EXTRAIR SETORES APENAS DAS PARADAS FILTRADAS
+                    if (!"regular".equals(userType)) {
+                        Set<String> setores = new HashSet<>();
+                        for (Parada parada : paradasList) {
+                            if (parada.getSetor() != null && !parada.getSetor().isEmpty()) {
+                                setores.add(parada.getSetor());
+                            }
                         }
+                        addChipsToChipGroup(new ArrayList<>(setores));
                     }
-
-                    addChipsToChipGroup(new ArrayList<>(setores));
 
 //                    Toast.makeText(getContext(), "Paradas carregadas: " + paradasList.size(), Toast.LENGTH_SHORT).show();
 
                 } else {
-                    Toast.makeText(getContext(), "Erro ao carregar paradas: " + response.code(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), "Erro ao carregar paradas: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -171,6 +250,31 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), "Falha na conexão: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void aplicarFiltroUsuario() {
+        paradasList.clear();
+
+        if ("regular".equals(userType)) {
+            for (Parada parada : allParadasList) {
+                if (parada.getSetor() != null && parada.getSetor().equals(userSetor)) {
+                    paradasList.add(parada);
+                }
+            }
+
+            // Esconder botão de filtro para Operador
+            filtrarParadas.setVisibility(View.GONE);
+            chipGroupSetores.setVisibility(View.GONE);
+
+            Log.d("HomeFragment", "Operador - Setor: " + userSetor + ", Paradas: " + paradasList.size());
+
+        } else {
+            paradasList.addAll(allParadasList);
+            filtrarParadas.setVisibility(View.VISIBLE);
+            Log.d("HomeFragment", userType + " - Todas as paradas: " + allParadasList.size());
+        }
+
+        paradaAdapter.notifyDataSetChanged();
     }
 
     private Parada converterParaParada(RegistroParadaResponseDTO registro) {

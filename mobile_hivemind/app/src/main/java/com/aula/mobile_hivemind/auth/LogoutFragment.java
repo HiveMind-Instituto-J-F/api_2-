@@ -17,12 +17,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -31,13 +28,12 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import com.aula.mobile_hivemind.R;
-import com.aula.mobile_hivemind.auth.LoginActivity;
 import com.bumptech.glide.Glide;
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
 import com.google.android.material.imageview.ShapeableImageView;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -51,7 +47,7 @@ import java.util.Map;
 public class LogoutFragment extends Fragment {
     private static final String TAG = "LogoutFragment";
     private static final String PREFS_NAME = "ProfilePrefs";
-    private static final String KEY_PROFILE_IMAGE = "profile_image";
+    private static final String KEY_USER_EMAIL = "user_email";
     private static final String cloudName = "djouiin10";
     private static final String uploadPreset = "Main_preset";
 
@@ -66,6 +62,9 @@ public class LogoutFragment extends Fragment {
 
     private Uri currentPhotoUri;
     private SharedPreferences sharedPreferences;
+    private FirebaseFirestore db;
+    private String userEmail;
+    private boolean cloudinaryInitialized = false;
 
     public LogoutFragment() {}
 
@@ -73,6 +72,7 @@ public class LogoutFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharedPreferences = requireContext().getSharedPreferences(PREFS_NAME, 0);
+        db = FirebaseFirestore.getInstance();
         initializeLaunchers();
         initCloudinary();
     }
@@ -86,30 +86,205 @@ public class LogoutFragment extends Fragment {
         btnSair = view.findViewById(R.id.btnSair);
         imgPerfil = view.findViewById(R.id.imgFoto);
 
-        // Carregar imagem salva se existir
-        loadSavedProfileImage();
+        loadUserProfileImage();
 
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            usuarioLogado.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-        }
-
-        btnSair.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut();
-            Toast.makeText(getContext(), "Deslogado com sucesso", Toast.LENGTH_SHORT).show();
-
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            requireActivity().finish();
-        });
-
+        btnSair.setOnClickListener(v -> mostrarDialogoConfirmacaoLogout());
         imgPerfil.setOnClickListener(v -> showImagePickerDialog());
 
         return view;
     }
 
+    private void initCloudinary() {
+        try {
+            Map config = new HashMap();
+            config.put("cloud_name", cloudName);
+            config.put("secure", true);
+
+            // 🔧 INICIALIZAR SEM VERIFICAR SE JÁ ESTÁ INICIALIZADO
+            MediaManager.init(requireContext(), config);
+            cloudinaryInitialized = true;
+            Log.d(TAG, "Cloudinary inicializado com sucesso");
+
+        } catch (Exception e) {
+            Log.e(TAG, "Erro ao inicializar Cloudinary: " + e.getMessage());
+            cloudinaryInitialized = false;
+            Toast.makeText(requireContext(), "Cloudinary não configurado", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean isCloudinaryReady() {
+        return cloudinaryInitialized;
+    }
+
+    private String getProfileImageKey() {
+        return "profile_image_" + (userEmail != null ? userEmail.hashCode() : "default");
+    }
+
+    private String getCloudinaryUrlKey() {
+        return "cloudinary_url_" + (userEmail != null ? userEmail.hashCode() : "default");
+    }
+
+    private void loadUserProfileImage() {
+        String cloudinaryUrl = sharedPreferences.getString(getCloudinaryUrlKey(), null);
+        if (cloudinaryUrl != null) {
+            Glide.with(requireContext())
+                    .load(cloudinaryUrl)
+                    .placeholder(R.drawable.img)
+                    .into(imgPerfil);
+            return;
+        }
+
+        String encodedImage = sharedPreferences.getString(getProfileImageKey(), null);
+        if (encodedImage != null) {
+            byte[] byteArray = Base64.decode(encodedImage, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+            if (bitmap != null) {
+                imgPerfil.setImageBitmap(bitmap);
+            }
+        } else {
+            imgPerfil.setImageResource(R.drawable.img);
+        }
+    }
+
+    private void saveProfileImageLocally(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(getProfileImageKey(), encodedImage);
+        editor.apply();
+    }
+
+    private void saveCloudinaryUrl(String imageUrl) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(getCloudinaryUrlKey(), imageUrl);
+        editor.apply();
+    }
+
+    private void removerFotoPerfil() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(getProfileImageKey());
+        editor.remove(getCloudinaryUrlKey());
+        editor.apply();
+
+        imgPerfil.setImageResource(R.drawable.img);
+        Toast.makeText(requireContext(), "Foto removida com sucesso", Toast.LENGTH_SHORT).show();
+    }
+
+    private void mostrarDialogoRemoverFoto() {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Remover Foto")
+                .setMessage("Tem certeza que deseja remover sua foto de perfil?")
+                .setPositiveButton("Sim, Remover", (dialog, which) -> removerFotoPerfil())
+                .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
+    private void showImagePickerDialog() {
+        checkPermissions();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Foto de Perfil");
+        builder.setMessage("Escolha uma opção para sua foto de perfil");
+
+        boolean usuarioTemFoto = sharedPreferences.contains(getProfileImageKey()) ||
+                sharedPreferences.contains(getCloudinaryUrlKey());
+
+        builder.setPositiveButton("Tirar Foto", (dialog, which) -> openCamera());
+        builder.setNegativeButton("Escolher da Galeria", (dialog, which) -> openGallery());
+
+        if (usuarioTemFoto) {
+            builder.setNeutralButton("Remover Foto", (dialog, which) -> mostrarDialogoRemoverFoto());
+        } else {
+            builder.setNeutralButton("Cancelar", (dialog, which) -> dialog.dismiss());
+        }
+
+        builder.show();
+    }
+
+    private void mostrarDialogoConfirmacaoLogout() {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Confirmar Saída")
+                .setMessage("Tem certeza que deseja sair da sua conta?")
+                .setPositiveButton("Sim, Sair", (dialog, which) -> fazerLogout())
+                .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
+    private void fazerLogout() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(KEY_USER_EMAIL);
+        editor.apply();
+
+//        Toast.makeText(getContext(), "Deslogado com sucesso", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        requireActivity().finish();
+    }
+
+    private void uploadToCloudinary(Uri imageUri) {
+        if (!isCloudinaryReady()) {
+            Log.e(TAG, "Cloudinary não está inicializado");
+//            Toast.makeText(requireContext(), "Serviço de imagens não disponível", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Log.d(TAG, "Iniciando upload para Cloudinary");
+
+        String publicId = "profile_" + (userEmail != null ? userEmail.replace("@", "_").replace(".", "_") : "unknown") + "_" + System.currentTimeMillis();
+
+        MediaManager.get().upload(imageUri)
+                .option("public_id", publicId)
+                .option("folder", "profile_pictures")
+                .unsigned(uploadPreset)
+                .callback(new UploadCallback() {
+                    @Override
+                    public void onStart(String requestId) {
+                        Log.d(TAG, "Upload iniciado: " + requestId);
+                        requireActivity().runOnUiThread(() ->
+                                Toast.makeText(requireContext(), "Enviando imagem...", Toast.LENGTH_SHORT).show());
+                    }
+
+                    @Override
+                    public void onProgress(String requestId, long bytes, long totalBytes) {
+                        Log.d(TAG, "Upload progresso: " + bytes + "/" + totalBytes);
+                    }
+
+                    @Override
+                    public void onSuccess(String requestId, Map resultData) {
+                        Log.d(TAG, "Upload concluído com sucesso");
+                        String imageUrl = (String) resultData.get("secure_url");
+
+                        requireActivity().runOnUiThread(() -> {
+                            Toast.makeText(requireContext(), "Imagem salva na nuvem!", Toast.LENGTH_SHORT).show();
+                            saveCloudinaryUrl(imageUrl);
+                            Glide.with(requireContext())
+                                    .load(imageUrl)
+                                    .placeholder(R.drawable.img)
+                                    .into(imgPerfil);
+                        });
+                    }
+
+                    @Override
+                    public void onError(String requestId, ErrorInfo error) {
+                        Log.e(TAG, "Erro no upload: " + error.getDescription());
+                        requireActivity().runOnUiThread(() ->
+                                Toast.makeText(requireContext(), "Erro ao enviar imagem", Toast.LENGTH_LONG).show());
+                    }
+
+                    @Override
+                    public void onReschedule(String requestId, ErrorInfo error) {
+                        Log.w(TAG, "Upload reagendado: " + error.getDescription());
+                    }
+                })
+                .dispatch();
+    }
+
     private void initializeLaunchers() {
-        // Launcher para permissões
         permissionLauncher = registerForActivityResult(
                 new ActivityResultContracts.RequestMultiplePermissions(),
                 result -> {
@@ -122,15 +297,13 @@ public class LogoutFragment extends Fragment {
                     );
 
                     if (cameraGranted != null && cameraGranted && storageGranted != null && storageGranted) {
-                        // Permissões concedidas
-                        Log.d(TAG, "Todas as permissões concedidas");
+                        Log.d(TAG, "Permissões concedidas");
                     } else {
                         Toast.makeText(requireContext(), "Permissões necessárias não concedidas", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
 
-        // Launcher para galeria
         galleryLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -143,7 +316,6 @@ public class LogoutFragment extends Fragment {
                 }
         );
 
-        // Launcher para câmera
         cameraLauncher = registerForActivityResult(
                 new ActivityResultContracts.TakePicture(),
                 success -> {
@@ -156,34 +328,12 @@ public class LogoutFragment extends Fragment {
         );
     }
 
-    private void showImagePickerDialog() {
-        // Verificar permissões primeiro
-        checkPermissions();
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Escolher imagem");
-        builder.setMessage("Selecione a fonte da imagem");
-
-        builder.setPositiveButton("Câmera", (dialog, which) -> openCamera());
-        builder.setNegativeButton("Galeria", (dialog, which) -> openGallery());
-        builder.setNeutralButton("Cancelar", (dialog, which) -> dialog.dismiss());
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
     private void checkPermissions() {
         String[] permissions;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            permissions = new String[]{
-                    Manifest.permission.CAMERA,
-                    Manifest.permission.READ_MEDIA_IMAGES
-            };
+            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES};
         } else {
-            permissions = new String[]{
-                    Manifest.permission.CAMERA,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-            };
+            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE};
         }
         permissionLauncher.launch(permissions);
     }
@@ -214,27 +364,17 @@ public class LogoutFragment extends Fragment {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-        return File.createTempFile(
-                imageFileName,
-                ".jpg",
-                storageDir
-        );
+        return File.createTempFile(imageFileName, ".jpg", storageDir);
     }
 
     private void handleSelectedImage(Uri imageUri) {
         try {
-            // Carregar e redimensionar a imagem
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), imageUri);
-            Bitmap resizedBitmap = resizeBitmap(bitmap, 500); // Reduzir para 500px de largura máxima
+            Bitmap resizedBitmap = resizeBitmap(bitmap, 500);
 
-            // Salvar localmente
             saveProfileImageLocally(resizedBitmap);
-
-            // Atualizar a ImageView
             imgPerfil.setImageBitmap(resizedBitmap);
 
-            // Upload para Cloudinary (implementar conforme sua necessidade)
             uploadToCloudinary(imageUri);
 
         } catch (IOException e) {
@@ -246,10 +386,7 @@ public class LogoutFragment extends Fragment {
     private Bitmap resizeBitmap(Bitmap bitmap, int maxSize) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
-
-        if (width <= maxSize && height <= maxSize) {
-            return bitmap;
-        }
+        if (width <= maxSize && height <= maxSize) return bitmap;
 
         float ratio = (float) width / height;
         int newWidth, newHeight;
@@ -263,105 +400,6 @@ public class LogoutFragment extends Fragment {
         }
 
         return Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
-    }
-
-    private void saveProfileImageLocally(Bitmap bitmap) {
-        // Converter Bitmap para Base64 e salvar no SharedPreferences
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream.toByteArray();
-        String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_PROFILE_IMAGE, encodedImage);
-        editor.apply();
-    }
-
-    private void loadSavedProfileImage() {
-        String encodedImage = sharedPreferences.getString(KEY_PROFILE_IMAGE, null);
-        if (encodedImage != null) {
-            byte[] byteArray = Base64.decode(encodedImage, Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-            if (bitmap != null) {
-                imgPerfil.setImageBitmap(bitmap);
-            }
-        }
-    }
-
-    private void initCloudinary() {
-        try {
-            Map config = new HashMap();
-            config.put("cloud_name", cloudName);
-            config.put("secure", true);
-            MediaManager.init(requireContext(), config);
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao inicializar Cloudinary", e);
-        }
-    }
-
-    private void uploadToCloudinary(Uri imageUri) {
-        Log.d(TAG, "Upload para Cloudinary: " + imageUri.toString());
-        Toast.makeText(requireContext(), "Imagem salva localmente. Upload para Cloudinary pendente.", Toast.LENGTH_SHORT).show();
-
-        MediaManager.get().upload(imageUri)
-            .option("folder", "profile_pictures")
-            .unsigned(uploadPreset)
-            .callback(new UploadCallback() {
-                @Override
-                public void onStart(String requestId) {
-                    Log.d(TAG, "Upload iniciado");
-                }
-
-                @Override
-                public void onProgress(String requestId, long bytes, long totalBytes) {
-                    Log.d(TAG, "Upload em progresso: " + bytes + "/" + totalBytes);
-                }
-
-                @Override
-                public void onSuccess(String requestId, Map resultData) {
-                    Log.d(TAG, "Upload concluído com sucesso");
-                    String imageUrl = (String) resultData.get("secure_url");
-
-                    requireActivity().runOnUiThread(() -> {
-                        Toast.makeText(requireContext(), "Imagem salva na nuvem!", Toast.LENGTH_SHORT).show();
-
-                        // Carregar imagem do Cloudinary usando Glide
-                        Glide.with(requireContext())
-                                .load(imageUrl)
-                                .into(imgPerfil);
-
-                        // Salvar a URL para uso futuro
-                        saveCloudinaryUrl(imageUrl);
-                    });
-                }
-
-                @Override
-                public void onError(String requestId, ErrorInfo error) {
-                    Log.e(TAG, "Erro no upload: " + error.getDescription());
-                }
-
-                @Override
-                public void onReschedule(String requestId, ErrorInfo error) {
-                    Log.d(TAG, "Upload reagendado");
-                }
-            })
-            .dispatch();
-
-    }
-
-    private void saveCloudinaryUrl(String imageUrl) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("cloudinary_url", imageUrl);
-        editor.apply();
-    }
-
-    private void loadCloudinaryImage() {
-        String cloudinaryUrl = sharedPreferences.getString("cloudinary_url", null);
-        if (cloudinaryUrl != null) {
-            Glide.with(requireContext())
-                    .load(cloudinaryUrl)
-                    .into(imgPerfil);
-        }
     }
 
     @Override

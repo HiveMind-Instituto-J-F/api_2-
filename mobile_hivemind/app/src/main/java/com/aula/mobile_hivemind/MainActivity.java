@@ -1,5 +1,6 @@
 package com.aula.mobile_hivemind;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,14 +35,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mAuth = FirebaseAuth.getInstance();
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser == null) {
-            redirectToLogin();
-            return;
-        }
-
         userType = getIntent().getStringExtra("USER_TYPE");
         if (userType == null) {
             redirectToLogin();
@@ -60,11 +53,6 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        userType = getIntent().getStringExtra("USER_TYPE");
-        if (userType == null) {
-            userType = "regular";
-        }
-
         fabMain = findViewById(R.id.fab_main);
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
@@ -72,13 +60,10 @@ public class MainActivity extends AppCompatActivity {
         setupNavigationByUserType();
         setupFabAction();
 
-//        Toast.makeText(this, "Logado como: " + userType, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Bem-vindo! Perfil: " + userType, Toast.LENGTH_SHORT).show();
     }
 
-
     private void redirectToLogin() {
-        mAuth.signOut();
-
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
@@ -88,18 +73,14 @@ public class MainActivity extends AppCompatActivity {
     // -------------------- FAB --------------------
     public void setFabVisibility(boolean visible) {
         if (fabMain != null) {
-            if ("RH".equals(userType)) {
-                fabMain.setVisibility(View.GONE);
+            if (visible) {
+                fabMain.setVisibility(View.VISIBLE);
+                fabMain.setImageResource(R.drawable.baseline_add_24);
+                fabMain.setAlpha(1f);
+                fabMain.setScaleX(1f);
+                fabMain.setScaleY(1f);
             } else {
-                if (visible) {
-                    fabMain.setVisibility(View.VISIBLE);
-                    fabMain.setImageResource(R.drawable.baseline_add_24);
-                    fabMain.setAlpha(1f);
-                    fabMain.setScaleX(1f);
-                    fabMain.setScaleY(1f);
-                } else {
-                    fabMain.setVisibility(View.GONE);
-                }
+                fabMain.setVisibility(View.GONE);
             }
         }
     }
@@ -112,22 +93,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupFabAction() {
-        if ("RH".equals(userType)) {
-            // RH não tem FAB
-            fabMain.setVisibility(View.GONE);
-        } else {
-            fabMain.setVisibility(View.VISIBLE);
+        // 🔧 TODOS OS USUÁRIOS PODEM VER O FAB, MAS COM AÇÕES DIFERENTES
+        fabMain.setVisibility(View.VISIBLE);
 
-            fabMain.setOnClickListener(v -> {
-                if ("regular".equals(userType)) {
-                    // Ação para usuário regular
+        fabMain.setOnClickListener(v -> {
+            switch (userType) {
+                case "regular": // OPERADOR
                     navController.navigate(R.id.addParadaFragment);
-                } else if ("MOP".equals(userType)) {
-                    // Ação para usuário MOP
-                    Toast.makeText(this, "Ação MOP", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+                    break;
+
+                case "MOP": // ENGENHEIRO
+                    navController.navigate(R.id.addParadaFragment);
+                    break;
+
+                case "RH": // SUPERVISOR
+                    // 🔧 RH TAMBÉM PODE ADICIONAR PARADAS
+                    navController.navigate(R.id.addParadaFragment);
+                    break;
+
+                default:
+                    Toast.makeText(this, "Ação não disponível para seu perfil", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        });
     }
 
     private void closeFab(FloatingActionButton... fabs) {
@@ -153,20 +141,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupNavigationByUserType() {
         BottomNavigationView navView = binding.navView;
-
         AppBarConfiguration appBarConfiguration;
 
         if ("regular".equals(userType)) {
-            // USUÁRIO REGULAR
+            // OPERADOR
             appBarConfiguration = new AppBarConfiguration.Builder(
                     R.id.navigation_home,
                     R.id.navigation_logout
             ).build();
 
-            // Esconder bottom navigation para usuário regular
             navView.setVisibility(View.VISIBLE);
-
-            // Mostrar apenas o item home e logout
             navView.getMenu().findItem(R.id.navigation_home).setVisible(true);
             navView.getMenu().findItem(R.id.navigation_dashboard).setVisible(false);
             navView.getMenu().findItem(R.id.navigation_calendar).setVisible(false);
@@ -174,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
             navView.getMenu().findItem(R.id.navigation_logout).setVisible(true);
 
         } else if ("MOP".equals(userType)) {
-            // USUÁRIO MOP
+            // ENGENHEIRO
             appBarConfiguration = new AppBarConfiguration.Builder(
                     R.id.navigation_home,
                     R.id.navigation_dashboard,
@@ -188,9 +172,8 @@ public class MainActivity extends AppCompatActivity {
             navView.getMenu().findItem(R.id.navigation_homerh).setVisible(false);
             navView.getMenu().findItem(R.id.navigation_logout).setVisible(true);
 
-
         } else if ("RH".equals(userType)) {
-            // USUÁRIO RH
+            // SUPERVISOR
             appBarConfiguration = new AppBarConfiguration.Builder(
                     R.id.navigation_homerh,
                     R.id.navigation_calendar,
@@ -204,18 +187,17 @@ public class MainActivity extends AppCompatActivity {
             navView.getMenu().findItem(R.id.navigation_homerh).setVisible(true);
             navView.getMenu().findItem(R.id.navigation_logout).setVisible(true);
 
-            // Navegar para a tela do RH por padrão
+            // Navegar para home RH por padrão
             navController.navigate(R.id.navigation_homerh);
 
         } else {
-            // PADRÃO
+            // PADRÃO (Operador)
             appBarConfiguration = new AppBarConfiguration.Builder(
                     R.id.navigation_home,
                     R.id.navigation_logout
             ).build();
         }
 
-        // Configurar navegação
         NavigationUI.setupWithNavController(navView, navController);
     }
 }
