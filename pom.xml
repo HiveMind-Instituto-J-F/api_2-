@@ -38,6 +38,7 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
+
 		<!-- Database driver -->
 		<dependency>
 			<groupId>org.postgresql</groupId>

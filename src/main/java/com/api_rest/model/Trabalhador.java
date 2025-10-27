@@ -15,23 +15,19 @@ public class Trabalhador {
     private String login;
     private String senha;
     private String setor;
+    private String imagem;
 
     public Trabalhador() {
     }
 
-    public Trabalhador(Long id_planta, String tipo_perfil, String login, String senha, String setor) {;
+    public Trabalhador(Long id, Long id_planta, String tipo_perfil, String login, String senha, String setor, String imagem) {
+        this.id = id;
         this.id_planta = id_planta;
         this.tipo_perfil = tipo_perfil;
         this.login = login;
         this.senha = senha;
         this.setor = setor;
-    }
-
-    public Trabalhador(String tipo_perfil, String login, String senha, String setor) {
-        this.tipo_perfil = tipo_perfil;
-        this.login = login;
-        this.senha = senha;
-        this.setor = setor;
+        this.imagem = imagem;
     }
 
     public Long getId() {
@@ -74,6 +70,10 @@ public class Trabalhador {
         this.setor = setor;
     }
 
+    public String getImagem() { return imagem; }
+
+    public void setImagem(String imagem) { this.imagem = imagem; }
+
     @Override
     public String toString() {
         return "Trabalhador{" +
@@ -83,6 +83,7 @@ public class Trabalhador {
                 ", login='" + login + '\'' +
                 ", senha='" + senha + '\'' +
                 ", setor='" + setor + '\'' +
+                ", imagem='" + imagem + '\'' +
                 '}';
     }
 }

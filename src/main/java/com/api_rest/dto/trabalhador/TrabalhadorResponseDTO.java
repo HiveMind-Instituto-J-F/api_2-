@@ -9,6 +9,7 @@ public class TrabalhadorResponseDTO {
     private String login;
     private String senha;
     private String setor;
+    private String imagem;
 
     public TrabalhadorResponseDTO() {}
 
@@ -19,6 +20,7 @@ public class TrabalhadorResponseDTO {
         this.login = trabalhador.getLogin();
         this.senha = trabalhador.getSenha();
         this.setor = trabalhador.getSetor();
+        this.imagem = trabalhador.getImagem();
     }
 
     public Long getId() {
@@ -60,4 +62,8 @@ public class TrabalhadorResponseDTO {
     public void setSetor(String setor) {
         this.setor = setor;
     }
+
+    public String getImagem() {return imagem;}
+
+    public void setImagem(String imagem) {this.imagem = imagem;}
 }

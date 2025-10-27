@@ -13,6 +13,8 @@ public class TrabalhadorRequestDTO {
     private String senha;
     @NotNull
     private String setor;
+    @NotNull
+    private String imagem;
 
     public Long getId_planta() {
         return id_planta;
@@ -48,5 +50,13 @@ public class TrabalhadorRequestDTO {
 
     public void setSetor(String setor) {
         this.setor = setor;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 }

@@ -49,6 +49,7 @@ public class ServiceTrabalhador {
         trabalhadorExistente.setSenha(trabalhadorRequestDTO.getSenha());
         trabalhadorExistente.setSetor(trabalhadorRequestDTO.getSetor());
         trabalhadorExistente.setTipo_perfil(trabalhadorRequestDTO.getTipo_perfil());
+        trabalhadorExistente.setImagem(trabalhadorRequestDTO.getImagem());
 
         Trabalhador trabalhador = repository.save(trabalhadorExistente);
 
@@ -74,6 +75,10 @@ public class ServiceTrabalhador {
 
         if (trabalhadorExitente.getSetor() == null) {
             trabalhadorExitente.setSetor(trabalhadorRequestDTO.getSetor());
+        }
+
+        if (trabalhadorExitente.getImagem() == null) {
+            trabalhadorExitente.setImagem(trabalhadorRequestDTO.getImagem());
         }
 
         Trabalhador trabalhador = repository.save(trabalhadorExitente);

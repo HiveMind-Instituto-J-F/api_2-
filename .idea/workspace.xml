@@ -47,10 +47,10 @@
     &quot;accountId&quot;: &quot;e1d7cae4-8eaa-4110-a2bc-03e813fb2d25&quot;
   }
 }</component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -73,6 +73,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Maven.API_Rest [clean,compile].executor&quot;: &quot;Run&quot;,
     &quot;Maven.API_Rest [clean,install,-XX].executor&quot;: &quot;Run&quot;,
     &quot;Maven.API_Rest [clean,install,-X].executor&quot;: &quot;Run&quot;,
     &quot;Maven.API_Rest [clean,install].executor&quot;: &quot;Run&quot;,
@@ -107,6 +108,7 @@
       <command value="mvn clean install -XX" />
       <command value="mvn clean install -X" />
       <command value="mvn clean install" />
+      <command value="mvn clean compile" />
     </option>
   </component>
   <component name="RunManager">
@@ -148,6 +150,7 @@
       <workItem from="1761216731912" duration="92000" />
       <workItem from="1761312339309" duration="7888000" />
       <workItem from="1761324929662" duration="3066000" />
+      <workItem from="1761576060578" duration="102000" />
     </task>
     <servers />
   </component>
