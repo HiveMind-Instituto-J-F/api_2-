@@ -1,10 +1,13 @@
 package com.api_rest.controller;
 
+import com.api_rest.dto.chatbot.ChatBotRequestDTO;
+import com.api_rest.dto.chatbot.ChatBotResponseDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.*;
 
 @RestController
@@ -17,9 +20,19 @@ public class ChatController {
     private static final String GEMINI_URL =
             "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=";
 
+    @Operation(
+            summary = "Envia uma mensagem para o Gemini",
+            description = "Este endpoint envia uma mensagem para o modelo Gemini e retorna a resposta gerada."
+    )
+    @ApiResponse(responseCode = "200", description = "Resposta gerada com sucesso")
     @PostMapping
-    public ResponseEntity<Map<String, String>> chat(@RequestBody Map<String, String> body) {
-        String message = body.get("message");
+    public ResponseEntity<ChatBotResponseDTO> chat(@RequestBody ChatBotRequestDTO request) {
+        String message = request.getMessage();
+
+        if (message == null || message.isBlank()) {
+            return ResponseEntity.badRequest()
+                    .body(new ChatBotResponseDTO(null, "Campo 'message' é obrigatório"));
+        }
 
         try {
             RestTemplate restTemplate = new RestTemplate();
@@ -42,34 +55,37 @@ public class ChatController {
                     Map.class
             );
 
-            Map data = response.getBody();
             String reply = "Sem resposta 😅";
+            Map data = response.getBody();
 
-            try {
-                List candidates = (List) data.get("candidates");
-                if (candidates != null && !candidates.isEmpty()) {
-                    Map firstCandidate = (Map) candidates.get(0);
-                    Map content = (Map) firstCandidate.get("content");
-                    List parts = (List) content.get("parts");
-
-                    if (parts != null && !parts.isEmpty()) {
-                        Map firstPart = (Map) parts.get(0);
-                        reply = (String) firstPart.get("text");
+            if (data != null && data.containsKey("candidates")) {
+                Object candidatesObj = data.get("candidates");
+                if (candidatesObj instanceof List<?> candidates && !candidates.isEmpty()) {
+                    Object firstCandidateObj = candidates.get(0);
+                    if (firstCandidateObj instanceof Map<?, ?> firstCandidate) {
+                        Object contentObj = firstCandidate.get("content");
+                        if (contentObj instanceof Map<?, ?> content) {
+                            Object partsObj = content.get("parts");
+                            if (partsObj instanceof List<?> parts && !parts.isEmpty()) {
+                                Object firstPartObj = parts.get(0);
+                                if (firstPartObj instanceof Map<?, ?> firstPart) {
+                                    Object textObj = firstPart.get("text");
+                                    if (textObj instanceof String text) {
+                                        reply = text;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                reply = "Erro ao processar resposta 😅";
             }
 
-            Map<String, String> responseBody = new HashMap<>();
-            responseBody.put("reply", reply);
-
-            return ResponseEntity.ok(responseBody);
+            return ResponseEntity.ok(new ChatBotResponseDTO(reply));
 
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(500).body(Map.of("error", "Erro ao conectar com Gemini"));
+            return ResponseEntity.status(500)
+                    .body(new ChatBotResponseDTO(null, "Erro ao conectar com Gemini"));
         }
     }
 }
