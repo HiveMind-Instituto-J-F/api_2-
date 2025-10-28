@@ -25,9 +25,11 @@ public class ServiceManutencao {
         return repositoryManutencao.findAll();
     }
 
-    public Manutencao buscarManutencao(Long id) {
-        return repositoryManutencao.findById(id)
+    public ManutencaoResponseDTO buscarManutencaoPorId(Long id) {
+        Manutencao manutencao = repositoryManutencao.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Manutenção não encontrada com o ID: " + id));
+
+        return objectMapper.convertValue(manutencao, ManutencaoResponseDTO.class);
     }
 
     public ManutencaoResponseDTO inserirManutencao(ManutencaoRequestDTO dto) {
@@ -37,7 +39,7 @@ public class ServiceManutencao {
     }
 
     public ManutencaoResponseDTO atualizarManutencao(Long id, ManutencaoRequestDTO dto) {
-        Manutencao manutencaoExistente = buscarManutencao(id);
+        Manutencao manutencaoExistente = objectMapper.convertValue(buscarManutencaoPorId(id), Manutencao.class);
 
         manutencaoExistente.setId_maquina(dto.getId_maquina());
         manutencaoExistente.setId_usuario(dto.getId_usuario());
@@ -49,7 +51,7 @@ public class ServiceManutencao {
     }
 
     public ManutencaoResponseDTO atualizarManutencaoParcial(Long id, ManutencaoRequestDTO dto) {
-        Manutencao manutencaoExistente = buscarManutencao(id);
+        Manutencao manutencaoExistente = objectMapper.convertValue(buscarManutencaoPorId(id), Manutencao.class);
 
         if (dto.getId_maquina() != null) {
             manutencaoExistente.setId_maquina(dto.getId_maquina());
@@ -69,7 +71,7 @@ public class ServiceManutencao {
     }
 
     public ManutencaoResponseDTO excluirManutencao(Long id) {
-        Manutencao manutencao = buscarManutencao(id);
+        Manutencao manutencao= objectMapper.convertValue(buscarManutencaoPorId(id), Manutencao.class);
         repositoryManutencao.delete(manutencao);
         return objectMapper.convertValue(manutencao, ManutencaoResponseDTO.class);
     }

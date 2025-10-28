@@ -23,6 +23,11 @@ public class ControllerRegistroParada {
         return serviceRegistroParada.listarRegistros();
     }
 
+    @GetMapping("buscarPorId/{id}")
+    public RegistroParadaResponseDTO buscarRegistroParada(@PathVariable Long id) {
+        return serviceRegistroParada.buscarRegistroPorId(id);
+    }
+
     @PostMapping("/inserir")
     public String inserirRegistroParada(@RequestBody RegistroParadaRequestDTO dto) {
         RegistroParadaResponseDTO resposta = serviceRegistroParada.inserirRegistros(dto);

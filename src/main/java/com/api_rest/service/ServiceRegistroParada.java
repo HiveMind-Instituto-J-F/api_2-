@@ -24,9 +24,11 @@ public class ServiceRegistroParada {
         return repositoryRegistroParada.findAll();
     }
 
-    public RegistroParadas buscarRegistroPorId(Long id) {
-        return repositoryRegistroParada.findById(id)
+    public RegistroParadaResponseDTO buscarRegistroPorId(Long id) {
+        RegistroParadas registroParadas = repositoryRegistroParada.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Registro não encontrado com o ID: " + id));
+
+        return objectMapper.convertValue(registroParadas, RegistroParadaResponseDTO.class);
     }
 
     public RegistroParadaResponseDTO inserirRegistros(RegistroParadaRequestDTO dto){
@@ -70,7 +72,7 @@ public class ServiceRegistroParada {
     }
 
     public RegistroParadaResponseDTO atualizarRegistro(Long id, RegistroParadaRequestDTO dto){
-        RegistroParadas registroExistente = buscarRegistroPorId(id);
+        RegistroParadas registroExistente = objectMapper.convertValue(buscarRegistroPorId(id), RegistroParadas.class);
 
         registroExistente.setTipo_parada(dto.getTipo_parada());
         registroExistente.setHora_inicio(dto.getHora_inicio());
@@ -86,7 +88,7 @@ public class ServiceRegistroParada {
     }
 
     public RegistroParadaResponseDTO atualizarRegistroParcialmente(Long id, RegistroParadaRequestDTO dto){
-        RegistroParadas registroExistente = buscarRegistroPorId(id);
+        RegistroParadas registroExistente = objectMapper.convertValue(buscarRegistroPorId(id), RegistroParadas.class);
 
         if (dto.getTipo_parada() != null){
             registroExistente.setTipo_parada(dto.getTipo_parada());
@@ -125,7 +127,7 @@ public class ServiceRegistroParada {
     }
 
     public RegistroParadaResponseDTO excluirRegistro(Long id){
-        RegistroParadas rp = buscarRegistroPorId(id);
+        RegistroParadas rp = objectMapper.convertValue(buscarRegistroPorId(id), RegistroParadas.class);
         repositoryRegistroParada.delete(rp);
         return objectMapper.convertValue(rp, RegistroParadaResponseDTO.class);
     }

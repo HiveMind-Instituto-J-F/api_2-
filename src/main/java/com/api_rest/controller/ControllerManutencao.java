@@ -23,6 +23,11 @@ public class ControllerManutencao {
         return serviceManutencao.listarManutencao();
     }
 
+    @GetMapping("/buscarPorId/{id}")
+    public ManutencaoResponseDTO buscarManutencao(@PathVariable Long id) {
+        return serviceManutencao.buscarManutencaoPorId(id);
+    }
+
     @PostMapping("/inserir")
     public String inserirManutencao(@RequestBody ManutencaoRequestDTO dto) {
         ManutencaoResponseDTO resposta = serviceManutencao.inserirManutencao(dto);
