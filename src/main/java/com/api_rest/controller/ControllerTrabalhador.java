@@ -22,6 +22,11 @@ public class ControllerTrabalhador {
         return serviceTrabalhador.listarTrabalhadores();
     }
 
+    @GetMapping("/buscarPorId/{id}")
+    public TrabalhadorResponseDTO buscarPorId(@RequestParam("id") Long id) {
+        return serviceTrabalhador.buscarTrabalhadorPorId(id);
+    }
+
     @PostMapping("/inserir")
     public String inserirTrabalhador(@RequestBody TrabalhadorRequestDTO dto) {
         TrabalhadorResponseDTO resposta = serviceTrabalhador.inserirTrabalhador(dto);

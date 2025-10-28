@@ -28,9 +28,11 @@ public class ServiceTrabalhador {
         return repository.findAll();
     }
 
-    public Trabalhador buscarTrabalhadorPorId(Long id) {
-        return repository.findById(id)
+    public TrabalhadorResponseDTO buscarTrabalhadorPorId(Long id) {
+        Trabalhador trabalhador =  repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Trabalhador não encontrado com o ID: " + id));
+
+        return objectMapper.convertValue(trabalhador, TrabalhadorResponseDTO.class);
     }
 
     public TrabalhadorResponseDTO inserirTrabalhador(TrabalhadorRequestDTO trabalhadorRequestDTO){
@@ -43,7 +45,7 @@ public class ServiceTrabalhador {
 
     public TrabalhadorResponseDTO atualizarTrabalhador(Long id, TrabalhadorRequestDTO trabalhadorRequestDTO){
 
-        Trabalhador trabalhadorExistente = buscarTrabalhadorPorId(id);
+        Trabalhador trabalhadorExistente = objectMapper.convertValue(buscarTrabalhadorPorId(id), Trabalhador.class);
 
         trabalhadorExistente.setLogin(trabalhadorRequestDTO.getLogin());
         trabalhadorExistente.setSenha(trabalhadorRequestDTO.getSenha());
@@ -59,29 +61,29 @@ public class ServiceTrabalhador {
     }
 
     public TrabalhadorResponseDTO atualizarTrabalhadorParcialmente(Long id, TrabalhadorRequestDTO trabalhadorRequestDTO){
-        Trabalhador trabalhadorExitente = buscarTrabalhadorPorId(id);
+        Trabalhador trabalhadorExistente = objectMapper.convertValue(buscarTrabalhadorPorId(id), Trabalhador.class);
 
         if (trabalhadorRequestDTO.getLogin() != null) {
-            trabalhadorExitente.setLogin(trabalhadorRequestDTO.getLogin());
+            trabalhadorExistente.setLogin(trabalhadorRequestDTO.getLogin());
         }
 
         if (trabalhadorRequestDTO.getSenha() != null) {
-            trabalhadorExitente.setSenha(trabalhadorRequestDTO.getSenha());
+            trabalhadorExistente.setSenha(trabalhadorRequestDTO.getSenha());
         }
 
         if (trabalhadorRequestDTO.getTipo_perfil() != null) {
-            trabalhadorExitente.setSetor(trabalhadorRequestDTO.getTipo_perfil());
+            trabalhadorExistente.setSetor(trabalhadorRequestDTO.getTipo_perfil());
         }
 
-        if (trabalhadorExitente.getSetor() == null) {
-            trabalhadorExitente.setSetor(trabalhadorRequestDTO.getSetor());
+        if (trabalhadorExistente.getSetor() == null) {
+            trabalhadorExistente.setSetor(trabalhadorRequestDTO.getSetor());
         }
 
-        if (trabalhadorExitente.getImagem() == null) {
-            trabalhadorExitente.setImagem(trabalhadorRequestDTO.getImagem());
+        if (trabalhadorExistente.getImagem() == null) {
+            trabalhadorExistente.setImagem(trabalhadorRequestDTO.getImagem());
         }
 
-        Trabalhador trabalhador = repository.save(trabalhadorExitente);
+        Trabalhador trabalhador = repository.save(trabalhadorExistente);
 
         firebaseSyncService.syncTrabalhadorToFirebase(trabalhador);
 
@@ -89,7 +91,7 @@ public class ServiceTrabalhador {
     }
 
     public TrabalhadorResponseDTO excluirTrabalhador(Long id){
-        Trabalhador tr = buscarTrabalhadorPorId(id);
+        Trabalhador tr = objectMapper.convertValue(buscarTrabalhadorPorId(id), Trabalhador.class);
         repository.delete(tr);
         firebaseSyncService.deleteTrabalhadorFromFirebase(id);
         return objectMapper.convertValue(tr, TrabalhadorResponseDTO.class);

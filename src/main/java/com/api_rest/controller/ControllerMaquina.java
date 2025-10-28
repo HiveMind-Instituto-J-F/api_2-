@@ -26,6 +26,11 @@ public class ControllerMaquina {
         return serviceMaquina.listarMaquinas();
     }
 
+    @GetMapping("/buscarPorId/{id}")
+    public MaquinaResponseDTO buscarMaquinaPorId(@PathVariable Long id) {
+        return serviceMaquina.buscarMaquinaPorId(id);
+    }
+
     @PostMapping("/inserir")
     public String inserirMaquina(@RequestBody MaquinaRequestDTO dto) {
         MaquinaResponseDTO resposta = serviceMaquina.inserirMaquina(dto);

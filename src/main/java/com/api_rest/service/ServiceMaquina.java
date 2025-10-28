@@ -24,9 +24,11 @@ public class ServiceMaquina {
         return repository.findAll();
     }
 
-    public Maquina buscarMaquinaPorId(Long id) {
-        return repository.findById(id)
+    public MaquinaResponseDTO buscarMaquinaPorId(Long id) {
+        Maquina maquina = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Maquina não encontrada com o ID: " + id));
+
+        return objectMapper.convertValue(maquina, MaquinaResponseDTO.class);
     }
 
     public MaquinaResponseDTO inserirMaquina(MaquinaRequestDTO dto){
@@ -36,7 +38,7 @@ public class ServiceMaquina {
     }
 
     public MaquinaResponseDTO atualizarMaquina(Long id, MaquinaRequestDTO dto){
-        Maquina maquinaExistente = buscarMaquinaPorId(id);
+        Maquina maquinaExistente = objectMapper.convertValue(buscarMaquinaPorId(id), Maquina.class);
 
         maquinaExistente.setNome(dto.getNome());
         maquinaExistente.setDescricao(dto.getDescricao());
@@ -50,7 +52,7 @@ public class ServiceMaquina {
     }
 
     public MaquinaResponseDTO atualizarMaquinaParcialmente(Long id, MaquinaRequestDTO dto){
-        Maquina maquinaExistente = buscarMaquinaPorId(id);
+        Maquina maquinaExistente = objectMapper.convertValue(buscarMaquinaPorId(id), Maquina.class);
 
         if (dto.getNome() != null) {
             maquinaExistente.setNome(dto.getNome());
@@ -81,7 +83,7 @@ public class ServiceMaquina {
     }
 
     public MaquinaResponseDTO excluirMaquina(Long id){
-        Maquina maquina = buscarMaquinaPorId(id);
+        Maquina maquina = objectMapper.convertValue(buscarMaquinaPorId(id), Maquina.class);
         repository.delete(maquina);
         return objectMapper.convertValue(maquina, MaquinaResponseDTO.class);
     }
