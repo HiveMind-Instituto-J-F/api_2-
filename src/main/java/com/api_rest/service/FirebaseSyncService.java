@@ -33,16 +33,16 @@ public class FirebaseSyncService {
     public CompletableFuture<String> syncTrabalhadorToFirebase(Trabalhador trabalhador) {
         try {
             Map<String, Object> firebaseTrabalhador = new HashMap<>();
-            firebaseTrabalhador.put("id", trabalhador.getId());
+            firebaseTrabalhador.put("id", trabalhador.getId_trabalhador());
             firebaseTrabalhador.put("tipo_perfil", trabalhador.getDes_tipo_perfil());
             firebaseTrabalhador.put("login", trabalhador.getDesLogin());
             firebaseTrabalhador.put("senha", trabalhador.getDes_senha());
             firebaseTrabalhador.put("setor", trabalhador.getDes_setor());
-            firebaseTrabalhador.put("sqlId", trabalhador.getId());
+            firebaseTrabalhador.put("sqlId", trabalhador.getId_trabalhador());
             firebaseTrabalhador.put("lastSync", new Date());
 
             ApiFuture<WriteResult> result = firestore.collection("trabalhadores")
-                    .document(String.valueOf(trabalhador.getId()))
+                    .document(String.valueOf(trabalhador.getId_trabalhador()))
                     .set(firebaseTrabalhador);
 
             result.get();
@@ -104,7 +104,7 @@ public class FirebaseSyncService {
             int syncedCount = 0;
 
             for (Trabalhador trabalhador : allTrabalhadores) {
-                if (!trabalhadorExistsInFirebase(trabalhador.getId())) {
+                if (!trabalhadorExistsInFirebase(trabalhador.getId_trabalhador())) {
                     syncTrabalhadorToFirebase(trabalhador);
                     syncedCount++;
                     System.out.println("Novo trabalhador sincronizado: " + trabalhador.getDesLogin());

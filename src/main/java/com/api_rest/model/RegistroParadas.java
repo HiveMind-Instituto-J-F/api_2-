@@ -12,7 +12,7 @@ import java.util.Date;
 public class RegistroParadas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_registro_paradas;
     private Time hora_inicio;
     private Time hora_fim;
     private Integer id_maquina;
@@ -44,12 +44,12 @@ public class RegistroParadas {
 
     public RegistroParadas() {}
 
-    public Long getId() {
-        return id;
+    public Long getId_registro_paradas() {
+        return id_registro_paradas;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_registro_paradas(Long id_registro_paradas) {
+        this.id_registro_paradas = id_registro_paradas;
     }
 
     public Time getHora_inicio() {
@@ -119,7 +119,7 @@ public class RegistroParadas {
     @Override
     public String toString() {
         return "RegistroParadas{" +
-                "id=" + id +
+                "id=" + id_registro_paradas +
                 ", hora_inicio=" + hora_inicio +
                 ", hora_fim=" + hora_fim +
                 ", id_maquina=" + id_maquina +

@@ -2,13 +2,14 @@ package com.api_rest.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Login {
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_login;
     private String des_cnpj;
     private String des_senha;
     private String des_cadastrante;
@@ -23,8 +24,8 @@ public class Login {
 
     public Login(){}
 
-    public Long getId() {
-        return id;
+    public Long getId_login() {
+        return id_login;
     }
 
     public String getCnpj() {
@@ -58,7 +59,7 @@ public class Login {
     @Override
     public String toString() {
         return "Login{" +
-                "id=" + id +
+                "id=" + id_login +
                 ", cnpj='" + des_cnpj + '\'' +
                 ", senha='" + des_senha + '\'' +
                 ", cadastrante='" + des_cadastrante + '\'' +

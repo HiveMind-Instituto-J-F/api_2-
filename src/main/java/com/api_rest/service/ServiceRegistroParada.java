@@ -49,7 +49,7 @@ public class ServiceRegistroParada {
         );
 
         RegistroParadas registro = objectMapper.convertValue(dto, RegistroParadas.class);
-        registro.setId(idGerado.longValue());
+        registro.setId_registro_paradas(idGerado.longValue());
 
         return objectMapper.convertValue(registro, RegistroParadaResponseDTO.class);
     }

@@ -2,6 +2,7 @@ package com.api_rest.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.sql.Time;
@@ -10,8 +11,8 @@ import java.sql.Time;
 public class Manutencao {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_manutencao;
     private Long id_maquina;
     private Long id_usuario;
     private String des_acao_realizada;
@@ -23,8 +24,8 @@ public class Manutencao {
 
     }
 
-    public Manutencao(Long id, Long id_maquina, Long id_usuario, String des_setor, String acao_realizada, Time hora_inicio, Time hora_final) {
-        this.id = id;
+    public Manutencao(Long id_manutencao, Long id_maquina, Long id_usuario, String des_setor, String acao_realizada, Time hora_inicio, Time hora_final) {
+        this.id_manutencao = id_manutencao;
         this.id_maquina = id_maquina;
         this.id_usuario = id_usuario;
         this.des_setor = des_setor;
@@ -33,12 +34,12 @@ public class Manutencao {
         this.hora_final = hora_final;
     }
 
-    public Long getId() {
-        return id;
+    public Long getId_manutencao() {
+        return id_manutencao;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_manutencao(Long id_manutencao) {
+        this.id_manutencao = id_manutencao;
     }
 
     public Long getId_maquina() {

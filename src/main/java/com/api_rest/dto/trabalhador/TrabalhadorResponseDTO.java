@@ -13,7 +13,7 @@ public class TrabalhadorResponseDTO {
     public TrabalhadorResponseDTO() {}
 
     public TrabalhadorResponseDTO(Trabalhador trabalhador) {
-        this.id_trabalhador = trabalhador.getId();
+        this.id_trabalhador = trabalhador.getId_trabalhador();
         this.des_tipo_perfil = trabalhador.getDes_tipo_perfil();
         this.des_login = trabalhador.getDesLogin();
         this.des_senha = trabalhador.getDes_senha();

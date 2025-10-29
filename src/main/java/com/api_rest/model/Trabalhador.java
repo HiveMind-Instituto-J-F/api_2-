@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class Trabalhador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_trabalhador;
 
     @Column(name = "des_tipo_perfil")
     private String desTipoPerfil;
@@ -34,8 +34,8 @@ public class Trabalhador {
         this.desImagem = des_imagem;
     }
 
-    public Long getId() {
-        return id;
+    public Long getId_trabalhador() {
+        return id_trabalhador;
     }
 
     public String getDes_tipo_perfil() {
@@ -81,7 +81,7 @@ public class Trabalhador {
     @Override
     public String toString() {
         return "Trabalhador{" +
-                "id=" + id +
+                "id=" + id_trabalhador +
                 ", des_tipo_perfil='" + desTipoPerfil + '\'' +
                 ", des_login='" + desLogin + '\'' +
                 ", des_senha='" + desSenha + '\'' +

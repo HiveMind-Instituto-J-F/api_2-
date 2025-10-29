@@ -17,7 +17,7 @@ public class RegistroParadaResponseDTO {
     private String des_parada;
 
     public RegistroParadaResponseDTO(RegistroParadas registroParada) {
-        this.id_registro_paradas = registroParada.getId();
+        this.id_registro_paradas = registroParada.getId_registro_paradas();
         this.hora_inicio = registroParada.getHora_inicio();
         this.hora_fim = registroParada.getHora_fim();
         this.id_maquina = registroParada.getId_maquina();

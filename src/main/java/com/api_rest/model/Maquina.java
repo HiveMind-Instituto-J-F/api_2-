@@ -2,13 +2,14 @@ package com.api_rest.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Maquina {
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_maquina;
     private String des_nome;
     private String des_tipo;
     private String des_setor;
@@ -29,8 +30,8 @@ public class Maquina {
 
     }
 
-    public Long getId() {
-        return id;
+    public Long getId_maquina() {
+        return id_maquina;
     }
 
     public String getDes_nome() {
@@ -84,7 +85,7 @@ public class Maquina {
     @Override
     public String toString() {
         return "Maquina{" +
-                "id=" + id +
+                "id=" + id_maquina +
                 ", des_nome='" + des_nome + '\'' +
                 ", des_tipo='" + des_tipo + '\'' +
                 ", des_setor='" + des_setor + '\'' +
