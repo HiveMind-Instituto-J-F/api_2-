@@ -9,20 +9,20 @@ public class Maquina {
     @Id
     @GeneratedValue
     private Long id;
-    private String nome;
-    private String tipo;
-    private String setor;
-    private String descricao;
-    private String status_operacional;
-    private Integer nivel_confianca;
+    private String des_nome;
+    private String des_tipo;
+    private String des_setor;
+    private String des_maquina;
+    private String des_status_operacional;
+    private Integer des_nivel_confianca;
 
     public Maquina(Integer nivel_confianca, String status_operacional, String descricao, String setor, String tipo, String nome) {
-        this.nivel_confianca = nivel_confianca;
-        this.status_operacional = status_operacional;
-        this.descricao = descricao;
-        this.setor = setor;
-        this.tipo = tipo;
-        this.nome = nome;
+        this.des_nivel_confianca = nivel_confianca;
+        this.des_status_operacional = status_operacional;
+        this.des_maquina = descricao;
+        this.des_setor = setor;
+        this.des_tipo = tipo;
+        this.des_nome = nome;
     }
 
     public Maquina() {
@@ -33,64 +33,64 @@ public class Maquina {
         return id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getDes_nome() {
+        return des_nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setDes_nome(String des_nome) {
+        this.des_nome = des_nome;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getDes_tipo() {
+        return des_tipo;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setDes_tipo(String des_tipo) {
+        this.des_tipo = des_tipo;
     }
 
-    public String getSetor() {
-        return setor;
+    public String getDes_setor() {
+        return des_setor;
     }
 
-    public void setSetor(String setor) {
-        this.setor = setor;
+    public void setDes_setor(String des_setor) {
+        this.des_setor = des_setor;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDes_maquina() {
+        return des_maquina;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDes_maquina(String des_maquina) {
+        this.des_maquina = des_maquina;
     }
 
-    public String getStatus_operacional() {
-        return status_operacional;
+    public String getDes_status_operacional() {
+        return des_status_operacional;
     }
 
-    public void setStatus_operacional(String status_operacional) {
-        this.status_operacional = status_operacional;
+    public void setDes_status_operacional(String des_status_operacional) {
+        this.des_status_operacional = des_status_operacional;
     }
 
-    public Integer getNivel_confianca() {
-        return nivel_confianca;
+    public Integer getDes_nivel_confianca() {
+        return des_nivel_confianca;
     }
 
-    public void setNivel_confianca(Integer nivel_confianca) {
-        this.nivel_confianca = nivel_confianca;
+    public void setDes_nivel_confianca(Integer des_nivel_confianca) {
+        this.des_nivel_confianca = des_nivel_confianca;
     }
 
     @Override
     public String toString() {
         return "Maquina{" +
                 "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", tipo='" + tipo + '\'' +
-                ", setor='" + setor + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", status_operacional='" + status_operacional + '\'' +
-                ", nivel_confianca=" + nivel_confianca +
+                ", des_nome='" + des_nome + '\'' +
+                ", des_tipo='" + des_tipo + '\'' +
+                ", des_setor='" + des_setor + '\'' +
+                ", des_maquina='" + des_maquina + '\'' +
+                ", des_status_operacional='" + des_status_operacional + '\'' +
+                ", des_nivel_confianca=" + des_nivel_confianca +
                 '}';
     }
 }

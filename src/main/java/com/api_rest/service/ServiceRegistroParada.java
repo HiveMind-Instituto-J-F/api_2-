@@ -42,11 +42,10 @@ public class ServiceRegistroParada {
                 dto.getId_maquina(),
                 dto.getId_usuario(),
                 dto.getId_manutencao(),
-                dto.getTipo_parada(),
                 dto.getHora_inicio(),
                 dto.getHora_fim(),
-                dto.getDate(),
-                dto.getDescricao()
+                dto.getDt_parada(),
+                dto.getDes_parada()
         );
 
         RegistroParadas registro = objectMapper.convertValue(dto, RegistroParadas.class);
@@ -60,11 +59,10 @@ public class ServiceRegistroParada {
                 dto.getId_maquina(),
                 dto.getId_usuario(),
                 dto.getId_manutencao(),
-                dto.getTipo_parada(),
                 dto.getHora_inicio(),
                 dto.getHora_fim(),
-                dto.getDate(),
-                dto.getDescricao()
+                dto.getDt_parada(),
+                dto.getDes_parada()
         );
         RegistroParadas registro = objectMapper.convertValue(dto, RegistroParadas.class);
 
@@ -74,14 +72,13 @@ public class ServiceRegistroParada {
     public RegistroParadaResponseDTO atualizarRegistro(Long id, RegistroParadaRequestDTO dto){
         RegistroParadas registroExistente = objectMapper.convertValue(buscarRegistroPorId(id), RegistroParadas.class);
 
-        registroExistente.setTipo_parada(dto.getTipo_parada());
         registroExistente.setHora_inicio(dto.getHora_inicio());
         registroExistente.setHora_fim(dto.getHora_fim());
         registroExistente.setId_maquina(dto.getId_maquina());
         registroExistente.setId_manutencao(dto.getId_manutencao());
         registroExistente.setId_usuario(dto.getId_usuario());
-        registroExistente.setDate(dto.getDate());
-        registroExistente.setDescricao(dto.getDescricao());
+        registroExistente.setDt_parada(dto.getDt_parada());
+        registroExistente.setDes_parada(dto.getDes_parada());
 
         RegistroParadas registro = repositoryRegistroParada.save(registroExistente);
         return objectMapper.convertValue(registro, RegistroParadaResponseDTO.class);
@@ -89,10 +86,6 @@ public class ServiceRegistroParada {
 
     public RegistroParadaResponseDTO atualizarRegistroParcialmente(Long id, RegistroParadaRequestDTO dto){
         RegistroParadas registroExistente = objectMapper.convertValue(buscarRegistroPorId(id), RegistroParadas.class);
-
-        if (dto.getTipo_parada() != null){
-            registroExistente.setTipo_parada(dto.getTipo_parada());
-        }
 
         if (dto.getHora_inicio() != null){
             registroExistente.setHora_inicio(dto.getHora_inicio());
@@ -114,12 +107,12 @@ public class ServiceRegistroParada {
             registroExistente.setId_usuario(dto.getId_usuario());
         }
 
-        if (dto.getDate() != null){
-            registroExistente.setDate(dto.getDate());
+        if (dto.getDt_parada() != null){
+            registroExistente.setDt_parada(dto.getDt_parada());
         }
 
-        if (dto.getDescricao() != null){
-            registroExistente.setDescricao(dto.getDescricao());
+        if (dto.getDes_parada() != null){
+            registroExistente.setDes_parada(dto.getDes_parada());
         }
 
         RegistroParadas registro = repositoryRegistroParada.save(registroExistente);

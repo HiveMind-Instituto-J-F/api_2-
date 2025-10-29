@@ -47,11 +47,11 @@ public class ServiceTrabalhador {
 
         Trabalhador trabalhadorExistente = objectMapper.convertValue(buscarTrabalhadorPorId(id), Trabalhador.class);
 
-        trabalhadorExistente.setLogin(trabalhadorRequestDTO.getLogin());
-        trabalhadorExistente.setSenha(trabalhadorRequestDTO.getSenha());
-        trabalhadorExistente.setSetor(trabalhadorRequestDTO.getSetor());
-        trabalhadorExistente.setTipo_perfil(trabalhadorRequestDTO.getTipo_perfil());
-        trabalhadorExistente.setImagem(trabalhadorRequestDTO.getImagem());
+        trabalhadorExistente.setDes_tipo_perfil(trabalhadorRequestDTO.getDes_tipo_perfil());
+        trabalhadorExistente.setDes_login(trabalhadorRequestDTO.getDes_login());
+        trabalhadorExistente.setDes_senha(trabalhadorRequestDTO.getDes_senha());
+        trabalhadorExistente.setDes_setor(trabalhadorRequestDTO.getDes_setor());
+        trabalhadorExistente.setDes_imagem(trabalhadorRequestDTO.getDes_imagem  ());
 
         Trabalhador trabalhador = repository.save(trabalhadorExistente);
 
@@ -63,24 +63,24 @@ public class ServiceTrabalhador {
     public TrabalhadorResponseDTO atualizarTrabalhadorParcialmente(Long id, TrabalhadorRequestDTO trabalhadorRequestDTO){
         Trabalhador trabalhadorExistente = objectMapper.convertValue(buscarTrabalhadorPorId(id), Trabalhador.class);
 
-        if (trabalhadorRequestDTO.getLogin() != null) {
-            trabalhadorExistente.setLogin(trabalhadorRequestDTO.getLogin());
+        if (trabalhadorRequestDTO.getDes_tipo_perfil() != null) {
+            trabalhadorExistente.setDes_tipo_perfil(trabalhadorRequestDTO.getDes_tipo_perfil());
         }
 
-        if (trabalhadorRequestDTO.getSenha() != null) {
-            trabalhadorExistente.setSenha(trabalhadorRequestDTO.getSenha());
+        if (trabalhadorRequestDTO.getDes_login() != null) {
+            trabalhadorExistente.setDes_login(trabalhadorRequestDTO.getDes_login());
         }
 
-        if (trabalhadorRequestDTO.getTipo_perfil() != null) {
-            trabalhadorExistente.setSetor(trabalhadorRequestDTO.getTipo_perfil());
+        if (trabalhadorRequestDTO.getDes_senha() != null) {
+            trabalhadorExistente.setDes_senha(trabalhadorRequestDTO.getDes_senha());
         }
 
-        if (trabalhadorExistente.getSetor() == null) {
-            trabalhadorExistente.setSetor(trabalhadorRequestDTO.getSetor());
+        if (trabalhadorRequestDTO.getDes_setor() != null) {
+            trabalhadorExistente.setDes_setor(trabalhadorRequestDTO.getDes_setor());
         }
 
-        if (trabalhadorExistente.getImagem() == null) {
-            trabalhadorExistente.setImagem(trabalhadorRequestDTO.getImagem());
+        if (trabalhadorRequestDTO.getDes_imagem() != null) {
+            trabalhadorExistente.setDes_imagem(trabalhadorRequestDTO.getDes_imagem());
         }
 
         Trabalhador trabalhador = repository.save(trabalhadorExistente);
@@ -105,7 +105,7 @@ public class ServiceTrabalhador {
     public boolean autenticarTrabalhador(String login, String senha) {
         try {
             Trabalhador trabalhador = buscarTrabalhadorPorLogin(login);
-            return trabalhador.getSenha().equals(senha);
+            return trabalhador.getDes_senha().equals(senha);
         } catch (EntityNotFoundException e) {
             return false;
         }

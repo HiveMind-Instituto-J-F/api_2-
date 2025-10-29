@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
-import java.sql.Date;
+import java.sql.Time;
 
 @Entity
 public class Manutencao {
@@ -14,21 +14,23 @@ public class Manutencao {
     private Long id;
     private Long id_maquina;
     private Long id_usuario;
-    private String ferramentas_utilizadas;
-    private String acao_realizada;
-    private Date date;
+    private String des_acao_realizada;
+    private String des_setor;
+    private Time hora_inicio;
+    private Time hora_final;
 
     public Manutencao() {
 
     }
 
-    public Manutencao(Long id, Long id_maquina, Long id_usuario, String ferramentas_utilizadas, String acao_realizada, Date date) {
+    public Manutencao(Long id, Long id_maquina, Long id_usuario, String des_setor, String acao_realizada, Time hora_inicio, Time hora_final) {
         this.id = id;
         this.id_maquina = id_maquina;
         this.id_usuario = id_usuario;
-        this.ferramentas_utilizadas = ferramentas_utilizadas;
-        this.acao_realizada = acao_realizada;
-        this.date = date;
+        this.des_setor = des_setor;
+        this.des_acao_realizada = acao_realizada;
+        this.hora_inicio = hora_inicio;
+        this.hora_final = hora_final;
     }
 
     public Long getId() {
@@ -55,27 +57,30 @@ public class Manutencao {
         this.id_usuario = id_usuario;
     }
 
-    public String getFerramentas_utilizadas() {
-        return ferramentas_utilizadas;
+    public String getDes_acao_realizada() {return des_acao_realizada;}
+    public void setDes_acao_realizada(String des_acao_realizada) {this.des_acao_realizada = des_acao_realizada;}
+
+    public String getDes_setor() {
+        return des_setor;
     }
 
-    public void setFerramentas_utilizadas(String ferramentas_utilizadas) {
-        this.ferramentas_utilizadas = ferramentas_utilizadas;
+    public void setDes_setor(String setor) {
+        this.des_setor = setor;
     }
 
-    public String getAcao_realizada() {
-        return acao_realizada;
+    public Time getHora_inicio() {
+        return hora_inicio;
     }
 
-    public void setAcao_realizada(String acao_realizada) {
-        this.acao_realizada = acao_realizada;
+    public void setHora_inicio(Time hora_inicio) {
+        this.hora_inicio = hora_inicio;
     }
 
-    public Date getDate() {
-        return date;
+    public Time getHora_final() {
+        return hora_final;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setHora_final(Time hora_final) {
+        this.hora_final = hora_final;
     }
 }

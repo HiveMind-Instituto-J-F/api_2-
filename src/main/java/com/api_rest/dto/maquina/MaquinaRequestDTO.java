@@ -5,66 +5,67 @@ import jakarta.validation.constraints.Max;
 public class MaquinaRequestDTO {
 
     @Max(value = 100, message = "Esse campo só aceita no máximo 100 caracteres")
-    private String nome;
+    private String des_nome;
 
     @Max(value = 50, message = "Esse campo só aceita no máximo 50 caracteres")
-    private String tipo;
+    private String des_tipo;
 
     @Max(value = 50, message = "Esse campo só aceita no máximo 50 caracteres")
-    private String setor;
+    private String des_setor;
 
-    private String descricao;
+    private String des_maquina;
 
     @Max(value = 50, message = "Esse campo só aceita no máximo 50 caracteres")
-    private String status_operacional;
+    private String des_status_operacional;
 
-    private Integer nivel_confianca;
+    private Integer des_nivel_confianca;
 
-    public String getNome() {
-        return nome;
+
+    public String getDes_nome() {
+        return des_nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setDes_nome(String des_nome) {
+        this.des_nome = des_nome;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getDes_tipo() {
+        return des_tipo;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setDes_tipo( String des_tipo) {
+        this.des_tipo = des_tipo;
     }
 
-    public String getSetor() {
-        return setor;
+    public String getDes_setor() {
+        return des_setor;
     }
 
-    public void setSetor(String setor) {
-        this.setor = setor;
+    public void setDes_setor( String des_setor) {
+        this.des_setor = des_setor;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDes_maquina() {
+        return des_maquina;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDes_maquina(String des_maquina) {
+        this.des_maquina = des_maquina;
     }
 
-    public String getStatus_operacional() {
-        return status_operacional;
+    public String getDes_status_operacional() {
+        return des_status_operacional;
     }
 
-    public void setStatus_operacional(String status_operacional) {
-        this.status_operacional = status_operacional;
+    public void setDes_status_operacional(String des_status_operacional) {
+        this.des_status_operacional = des_status_operacional;
     }
 
-    public Integer getNivel_confianca() {
-        return nivel_confianca;
+    public Integer getDes_nivel_confianca() {
+        return des_nivel_confianca;
     }
 
-    public void setNivel_confianca(Integer nivel_confianca) {
-        this.nivel_confianca = nivel_confianca;
+    public void setDes_nivel_confianca(Integer des_nivel_confianca) {
+        this.des_nivel_confianca = des_nivel_confianca;
     }
 }
