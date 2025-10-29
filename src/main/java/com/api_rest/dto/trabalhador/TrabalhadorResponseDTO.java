@@ -3,7 +3,7 @@ package com.api_rest.dto.trabalhador;
 import com.api_rest.model.Trabalhador;
 
 public class TrabalhadorResponseDTO {
-    private Long id;
+    private Long id_trabalhador;
     private String des_tipo_perfil;
     private String des_login;
     private String des_senha;
@@ -13,7 +13,7 @@ public class TrabalhadorResponseDTO {
     public TrabalhadorResponseDTO() {}
 
     public TrabalhadorResponseDTO(Trabalhador trabalhador) {
-        this.id = trabalhador.getId();
+        this.id_trabalhador = trabalhador.getId();
         this.des_tipo_perfil = trabalhador.getDes_tipo_perfil();
         this.des_login = trabalhador.getDesLogin();
         this.des_senha = trabalhador.getDes_senha();
@@ -21,8 +21,8 @@ public class TrabalhadorResponseDTO {
         this.des_imagem = trabalhador.getDes_imagem();
     }
 
-    public Long getId() {
-        return id;
+    public Long getId_trabalhador() {
+        return id_trabalhador;
     }
 
     public String getDes_tipo_perfil() {

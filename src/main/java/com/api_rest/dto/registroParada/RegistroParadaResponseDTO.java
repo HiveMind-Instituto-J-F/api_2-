@@ -6,7 +6,7 @@ import java.sql.Time;
 import java.util.Date;
 
 public class RegistroParadaResponseDTO {
-    private Long id;
+    private Long id_registro_paradas;
     private Time hora_inicio;
     private Time hora_fim;
     private Integer id_maquina;
@@ -17,7 +17,7 @@ public class RegistroParadaResponseDTO {
     private String des_parada;
 
     public RegistroParadaResponseDTO(RegistroParadas registroParada) {
-        this.id = registroParada.getId();
+        this.id_registro_paradas = registroParada.getId();
         this.hora_inicio = registroParada.getHora_inicio();
         this.hora_fim = registroParada.getHora_fim();
         this.id_maquina = registroParada.getId_maquina();
@@ -27,8 +27,8 @@ public class RegistroParadaResponseDTO {
         this.des_setor = registroParada.getDes_setor();
     }
 
-    public Long getId() {
-        return id;
+    public Long getId_registro_paradas() {
+        return id_registro_paradas;
     }
 
     public Time getHora_inicio() {

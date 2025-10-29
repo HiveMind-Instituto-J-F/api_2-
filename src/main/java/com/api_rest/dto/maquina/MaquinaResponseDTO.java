@@ -2,7 +2,7 @@ package com.api_rest.dto.maquina;
 
 public class MaquinaResponseDTO {
 
-    private Long id;
+    private Long id_maquina;
     private String des_nome;
     private String des_tipo;
     private String des_setor;
@@ -19,8 +19,8 @@ public class MaquinaResponseDTO {
         this.des_nivel_confianca = des_nivel_confianca;
     }
 
-    public Long getId() {
-        return id;
+    public Long getId_maquina() {
+        return id_maquina;
     }
 
     public Integer getDes_nivel_confianca() {

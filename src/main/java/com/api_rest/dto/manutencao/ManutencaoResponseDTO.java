@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 import java.sql.Time;
 
 public class ManutencaoResponseDTO {
-    private Long id;
+    private Long id_manutencao;
 
     @NotNull(message = "O campo id_maquina é obrigatório")
     private Long id_maquina;
@@ -20,7 +20,7 @@ public class ManutencaoResponseDTO {
     @Size(max = 255, message = "Esse campo só aceita no máximo 255 caracteres")
     private String des_setor;
     private Time hora_inicio;
-    private Time hora_final;
+    private Time hora_fim;
 
     public ManutencaoResponseDTO(
             Long id_maquina,
@@ -28,17 +28,17 @@ public class ManutencaoResponseDTO {
             String des_acao_realizada,
             String des_setor,
             Time hora_inicio,
-            Time hora_final
+            Time hora_fim
     ) {
         this.id_maquina = id_maquina;
         this.id_usuario = id_usuario;
         this.des_acao_realizada = des_acao_realizada;
         this.des_setor = des_setor;
         this.hora_inicio = hora_inicio;
-        this.hora_final = hora_final;
+        this.hora_fim = hora_fim;
     }
 
-    public Long getId() {return id;}
+    public Long getId_manutencao() {return id_manutencao;}
 
     public Long getId_maquina() {
         return id_maquina;
@@ -80,11 +80,11 @@ public class ManutencaoResponseDTO {
         this.hora_inicio = hora_inicio;
     }
 
-    public Time getHora_final() {
-        return hora_final;
+    public Time getHora_fim() {
+        return hora_fim;
     }
 
-    public void setHora_final(Time hora_final) {
-        this.hora_final = hora_final;
+    public void setHora_fim(Time hora_fim) {
+        this.hora_fim = hora_fim;
     }
 }

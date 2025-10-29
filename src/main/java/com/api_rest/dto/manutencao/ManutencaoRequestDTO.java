@@ -20,7 +20,8 @@ public class ManutencaoRequestDTO {
     private String des_setor;
 
     private Time hora_inicio;
-    private Time hora_final;
+
+    private Time hora_fim;
 
     public Long getId_maquina() {
         return id_maquina;
@@ -61,12 +62,12 @@ public class ManutencaoRequestDTO {
     public void setHora_inicio(Time hora_inicio) {
         this.hora_inicio = hora_inicio;
     }
-
-    public Time getHora_final() {
-        return hora_final;
+    
+    public Time getHora_fim() {
+        return hora_fim;
     }
 
-    public void setHora_final(Time hora_final) {
-        this.hora_final = hora_final;
+    public void setHora_fim(Time hora_fim) {
+        this.hora_fim = hora_fim;
     }
 }
