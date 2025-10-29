@@ -3,6 +3,7 @@ package com.api_rest.dto.manutencao;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.sql.Date;
 import java.sql.Time;
 
 public class ManutencaoRequestDTO {
@@ -18,6 +19,8 @@ public class ManutencaoRequestDTO {
 
     @Size(max = 255, message = "Esse campo só aceita no máximo 255 caracteres")
     private String des_setor;
+
+    private Date dt_manutencao;
 
     private Time hora_inicio;
 
@@ -53,6 +56,14 @@ public class ManutencaoRequestDTO {
 
     public void setDes_setor(String des_setor) {
         this.des_setor = des_setor;
+    }
+
+    public Date getDt_manutencao() {
+        return dt_manutencao;
+    }
+
+    public void setDt_manutencao(Date dt_manutencao) {
+        this.dt_manutencao = dt_manutencao;
     }
 
     public Time getHora_inicio() {
