@@ -18,20 +18,20 @@ public class Manutencao {
     private String des_acao_realizada;
     private String des_setor;
     private Time hora_inicio;
-    private Time hora_final;
+    private Time hora_fim;
 
     public Manutencao() {
 
     }
 
-    public Manutencao(Long id_manutencao, Long id_maquina, Long id_usuario, String des_setor, String acao_realizada, Time hora_inicio, Time hora_final) {
+    public Manutencao(Long id_manutencao, Long id_maquina, Long id_usuario, String des_setor, String acao_realizada, Time hora_inicio, Time hora_fim) {
         this.id_manutencao = id_manutencao;
         this.id_maquina = id_maquina;
         this.id_usuario = id_usuario;
         this.des_setor = des_setor;
         this.des_acao_realizada = acao_realizada;
         this.hora_inicio = hora_inicio;
-        this.hora_final = hora_final;
+        this.hora_fim = hora_fim;
     }
 
     public Long getId_manutencao() {
@@ -77,11 +77,11 @@ public class Manutencao {
         this.hora_inicio = hora_inicio;
     }
 
-    public Time getHora_final() {
-        return hora_final;
+    public Time getHora_fim() {
+        return hora_fim;
     }
 
-    public void setHora_final(Time hora_final) {
-        this.hora_final = hora_final;
+    public void setHora_fim(Time hora_fim) {
+        this.hora_fim = hora_fim;
     }
 }

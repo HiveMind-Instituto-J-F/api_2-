@@ -46,7 +46,7 @@ public class ServiceManutencao {
         manutencaoExistente.setDes_acao_realizada(dto.getDes_acao_realizada());
         manutencaoExistente.setDes_setor(dto.getDes_setor());
         manutencaoExistente.setHora_inicio(dto.getHora_inicio());
-        manutencaoExistente.setHora_final(dto.getHora_fim());
+        manutencaoExistente.setHora_fim(dto.getHora_fim());
 
         Manutencao manutencaoAtualizada = repositoryManutencao.save(manutencaoExistente);
         return objectMapper.convertValue(manutencaoAtualizada, ManutencaoResponseDTO.class);
@@ -71,7 +71,7 @@ public class ServiceManutencao {
             manutencaoExistente.setHora_inicio(dto.getHora_inicio());
         }
         if (dto.getHora_fim() != null) {
-            manutencaoExistente.setHora_final(dto.getHora_fim());
+            manutencaoExistente.setHora_fim(dto.getHora_fim());
         }
 
         Manutencao manutencaoAtualizada = repositoryManutencao.save(manutencaoExistente);
