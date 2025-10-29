@@ -10,80 +10,76 @@ public class Trabalhador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long id_planta;
-    private String tipo_perfil;
-    private String login;
-    private String senha;
-    private String setor;
-    private String imagem;
+    private String des_tipo_perfil;
+    private String des_login;
+    private String des_senha;
+    private String des_setor;
+    private String des_imagem;
 
     public Trabalhador() {
     }
 
-    public Trabalhador(Long id, Long id_planta, String tipo_perfil, String login, String senha, String setor, String imagem) {
-        this.id = id;
-        this.id_planta = id_planta;
-        this.tipo_perfil = tipo_perfil;
-        this.login = login;
-        this.senha = senha;
-        this.setor = setor;
-        this.imagem = imagem;
+    public Trabalhador(String des_tipo_perfil, String des_login, String des_senha, String des_setor, String des_imagem) {
+        this.des_tipo_perfil = des_tipo_perfil;
+        this.des_login = des_login;
+        this.des_senha = des_senha;
+        this.des_setor = des_setor;
+        this.des_imagem = des_imagem;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Long getId_planta() {
-        return id_planta;
+    public String getDes_tipo_perfil() {
+        return des_tipo_perfil;
     }
 
-    public String getTipo_perfil() {
-        return tipo_perfil;
+    public void setDes_tipo_perfil(String des_tipo_perfil) {
+        this.des_tipo_perfil = des_tipo_perfil;
     }
 
-    public void setTipo_perfil(String tipo_perfil) {
-        this.tipo_perfil = tipo_perfil;
+    public String getDes_login() {
+        return des_login;
     }
 
-    public String getLogin() {
-        return login;
+    public void setDes_login(String des_login) {
+        this.des_login = des_login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public String getDes_senha() {
+        return des_senha;
     }
 
-    public String getSenha() {
-        return senha;
+    public void setDes_senha(String des_senha) {
+        this.des_senha = des_senha;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public String getDes_setor() {
+        return des_setor;
     }
 
-    public String getSetor() {
-        return setor;
+    public void setDes_setor(String des_setor) {
+        this.des_setor = des_setor;
     }
 
-    public void setSetor(String setor) {
-        this.setor = setor;
+    public String getDes_imagem() {
+        return des_imagem;
     }
 
-    public String getImagem() { return imagem; }
-
-    public void setImagem(String imagem) { this.imagem = imagem; }
+    public void setDes_imagem(String des_imagem) {
+        this.des_imagem = des_imagem;
+    }
 
     @Override
     public String toString() {
         return "Trabalhador{" +
                 "id=" + id +
-                ", id_planta=" + id_planta +
-                ", tipo_perfil='" + tipo_perfil + '\'' +
-                ", login='" + login + '\'' +
-                ", senha='" + senha + '\'' +
-                ", setor='" + setor + '\'' +
-                ", imagem='" + imagem + '\'' +
+                ", des_tipo_perfil='" + des_tipo_perfil + '\'' +
+                ", des_login='" + des_login + '\'' +
+                ", des_senha='" + des_senha + '\'' +
+                ", des_setor='" + des_setor + '\'' +
+                ", des_imagem='" + des_imagem + '\'' +
                 '}';
     }
 }

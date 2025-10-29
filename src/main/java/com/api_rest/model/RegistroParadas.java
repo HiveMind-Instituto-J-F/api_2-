@@ -13,33 +13,33 @@ public class RegistroParadas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String tipo_parada;
     private Time hora_inicio;
     private Time hora_fim;
     private Integer id_maquina;
     private Integer id_manutencao;
     private Integer id_usuario;
-    private Date date;
-    private String descricao;
+    private Date dt_parada;
+    private String des_setor;
+    private String des_parada;
 
     public RegistroParadas(
-            String tipo_parada,
             Time hora_inicio,
             Time hora_fim,
             Integer id_maquina,
             Integer id_manutencao,
             Integer id_usuario,
-            Date date,
-            String descricao) {
+            Date dt_parada,
+            String des_setor,
+            String des_parada) {
 
-        this.tipo_parada = tipo_parada;
         this.hora_inicio = hora_inicio;
         this.hora_fim = hora_fim;
         this.id_maquina = id_maquina;
         this.id_manutencao = id_manutencao;
         this.id_usuario = id_usuario;
-        this.date = date;
-        this.descricao = descricao;
+        this.dt_parada = dt_parada;
+        this.des_setor = des_setor;
+        this.des_parada = des_parada;
     }
 
     public RegistroParadas() {}
@@ -50,14 +50,6 @@ public class RegistroParadas {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getTipo_parada() {
-        return tipo_parada;
-    }
-
-    public void setTipo_parada(String tipo_parada) {
-        this.tipo_parada = tipo_parada;
     }
 
     public Time getHora_inicio() {
@@ -88,27 +80,54 @@ public class RegistroParadas {
         return id_manutencao;
     }
 
-    public void setId_manutencao(Integer id_manutencao) {this.id_manutencao = id_manutencao;}
+    public void setId_manutencao(Integer id_manutencao) {
+        this.id_manutencao = id_manutencao;
+    }
 
     public Integer getId_usuario() {
         return id_usuario;
     }
 
-    public void setId_usuario(Integer id_usuario) { this.id_usuario = id_usuario; }
-
-    public Date getDate() {
-        return date;
+    public void setId_usuario(Integer id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public Date getDt_parada() {
+        return dt_parada;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public void setDt_parada(Date dt_parada) {
+        this.dt_parada = dt_parada;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public String getDes_setor() {
+        return des_setor;
+    }
+
+    public void setDes_setor(String des_setor) {
+        this.des_setor = des_setor;
+    }
+
+    public String getDes_parada() {
+        return des_parada;
+    }
+
+    public void setDes_parada(String des_parada) {
+        this.des_parada = des_parada;
+    }
+
+    @Override
+    public String toString() {
+        return "RegistroParadas{" +
+                "id=" + id +
+                ", hora_inicio=" + hora_inicio +
+                ", hora_fim=" + hora_fim +
+                ", id_maquina=" + id_maquina +
+                ", id_manutencao=" + id_manutencao +
+                ", id_usuario=" + id_usuario +
+                ", dt_parada=" + dt_parada +
+                ", des_setor='" + des_setor + '\'' +
+                ", des_parada='" + des_parada + '\'' +
+                '}';
     }
 }

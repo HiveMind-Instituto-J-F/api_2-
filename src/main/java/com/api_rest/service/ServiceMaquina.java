@@ -40,12 +40,12 @@ public class ServiceMaquina {
     public MaquinaResponseDTO atualizarMaquina(Long id, MaquinaRequestDTO dto){
         Maquina maquinaExistente = objectMapper.convertValue(buscarMaquinaPorId(id), Maquina.class);
 
-        maquinaExistente.setNome(dto.getNome());
-        maquinaExistente.setDescricao(dto.getDescricao());
-        maquinaExistente.setTipo(dto.getTipo());
-        maquinaExistente.setSetor(dto.getSetor());
-        maquinaExistente.setNivel_confianca(dto.getNivel_confianca());
-        maquinaExistente.setStatus_operacional(dto.getStatus_operacional());
+        maquinaExistente.setDes_nome(dto.getDes_nome());
+        maquinaExistente.setDes_tipo(dto.getDes_tipo());
+        maquinaExistente.setDes_setor(dto.getDes_setor());
+        maquinaExistente.setDes_maquina(dto.getDes_maquina());
+        maquinaExistente.setDes_status_operacional(dto.getDes_status_operacional());
+        maquinaExistente.setDes_nivel_confianca(dto.getDes_nivel_confianca());
 
         Maquina maquina = repository.save(maquinaExistente);
         return objectMapper.convertValue(maquina, MaquinaResponseDTO.class);
@@ -54,28 +54,28 @@ public class ServiceMaquina {
     public MaquinaResponseDTO atualizarMaquinaParcialmente(Long id, MaquinaRequestDTO dto){
         Maquina maquinaExistente = objectMapper.convertValue(buscarMaquinaPorId(id), Maquina.class);
 
-        if (dto.getNome() != null) {
-            maquinaExistente.setNome(dto.getNome());
+        if (dto.getDes_nome() != null) {
+            maquinaExistente.setDes_nome(dto.getDes_nome());
         }
 
-        if (dto.getDescricao() != null) {
-            maquinaExistente.setDescricao(dto.getDescricao());
+        if (dto.getDes_tipo() != null) {
+            maquinaExistente.setDes_tipo(dto.getDes_tipo());
         }
 
-        if (dto.getTipo() != null) {
-            maquinaExistente.setTipo(dto.getTipo());
+        if (dto.getDes_setor() != null) {
+            maquinaExistente.setDes_nome(dto.getDes_setor());
         }
 
-        if (dto.getSetor() != null) {
-            maquinaExistente.setSetor(dto.getSetor());
+        if (dto.getDes_maquina() != null) {
+            maquinaExistente.setDes_maquina(dto.getDes_maquina());
         }
 
-        if (dto.getNivel_confianca() != null) {
-            maquinaExistente.setNivel_confianca(dto.getNivel_confianca());
+        if (dto.getDes_status_operacional() != null) {
+            maquinaExistente.setDes_status_operacional(dto.getDes_status_operacional());
         }
 
-        if (dto.getStatus_operacional() != null) {
-            maquinaExistente.setStatus_operacional(dto.getStatus_operacional());
+        if (dto.getDes_nivel_confianca() != null) {
+            maquinaExistente.setDes_status_operacional(dto.getDes_status_operacional());
         }
 
         Maquina maquina = repository.save(maquinaExistente);

@@ -3,60 +3,55 @@ package com.api_rest.dto.trabalhador;
 import jakarta.validation.constraints.NotNull;
 
 public class TrabalhadorRequestDTO {
+
     @NotNull
-    private Long id_planta;
+    private String des_tipo_perfil;
     @NotNull
-    private String tipo_perfil;
+    private String des_login;
     @NotNull
-    private String login;
+    private String des_senha;
     @NotNull
-    private String senha;
+    private String des_setor;
     @NotNull
-    private String setor;
-    @NotNull
-    private String imagem;
+    private String des_imagem;
 
-    public Long getId_planta() {
-        return id_planta;
+    public String getDes_tipo_perfil() {
+        return des_tipo_perfil;
     }
 
-    public String getTipo_perfil() {
-        return tipo_perfil;
+    public void setDes_tipo_perfil( String des_tipo_perfil) {
+        this.des_tipo_perfil = des_tipo_perfil;
     }
 
-    public void setTipo_perfil(String tipo_perfil) {
-        this.tipo_perfil = tipo_perfil;
+    public String getDes_login() {
+        return des_login;
     }
 
-    public String getLogin() {
-        return login;
+    public void setDes_login(String des_login) {
+        this.des_login = des_login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public String getDes_senha() {
+        return des_senha;
     }
 
-    public String getSenha() {
-        return senha;
+    public void setDes_senha( String des_senha) {
+        this.des_senha = des_senha;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public String getDes_setor() {
+        return des_setor;
     }
 
-    public String getSetor() {
-        return setor;
+    public void setDes_setor( String des_setor) {
+        this.des_setor = des_setor;
     }
 
-    public void setSetor(String setor) {
-        this.setor = setor;
+    public String getDes_imagem() {
+        return des_imagem;
     }
 
-    public String getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
+    public void setDes_imagem( String des_imagem) {
+        this.des_imagem = des_imagem;
     }
 }

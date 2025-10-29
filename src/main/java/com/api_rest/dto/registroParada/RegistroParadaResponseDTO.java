@@ -7,41 +7,28 @@ import java.util.Date;
 
 public class RegistroParadaResponseDTO {
     private Long id;
-    private String tipo_parada;
     private Time hora_inicio;
     private Time hora_fim;
     private Integer id_maquina;
     private Integer id_manutencao;
     private Integer id_usuario;
-    private Date date;
-    private String descricao;
+    private Date dt_parada;
+    private String des_setor;
+    private String des_parada;
 
     public RegistroParadaResponseDTO(RegistroParadas registroParada) {
         this.id = registroParada.getId();
-        this.tipo_parada = registroParada.getTipo_parada();
         this.hora_inicio = registroParada.getHora_inicio();
         this.hora_fim = registroParada.getHora_fim();
         this.id_maquina = registroParada.getId_maquina();
         this.id_manutencao = registroParada.getId_manutencao();
         this.id_usuario = registroParada.getId_usuario();
-        this.date = registroParada.getDate();
-        this.descricao = registroParada.getDescricao();
+        this.dt_parada = registroParada.getDt_parada();
+        this.des_setor = registroParada.getDes_setor();
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTipo_parada() {
-        return tipo_parada;
-    }
-
-    public void setTipo_parada(String tipo_parada) {
-        this.tipo_parada = tipo_parada;
     }
 
     public Time getHora_inicio() {
@@ -84,19 +71,27 @@ public class RegistroParadaResponseDTO {
         this.id_usuario = id_usuario;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDt_parada() {
+        return dt_parada;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDt_parada(Date dt_parada) {
+        this.dt_parada = dt_parada;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDes_setor() {
+        return des_setor;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDes_setor(String des_setor) {
+        this.des_setor = des_setor;
+    }
+
+    public String getDes_parada() {
+        return des_parada;
+    }
+
+    public void setDes_parada(String des_parada) {
+        this.des_parada = des_parada;
     }
 }

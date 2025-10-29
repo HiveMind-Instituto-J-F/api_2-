@@ -6,8 +6,6 @@ import java.sql.Time;
 import java.sql.Date;
 
 public class RegistroParadaRequestDTO {
-    @NotNull
-    private String tipo_parada;
 
     @NotNull
     private Time hora_inicio;
@@ -25,18 +23,13 @@ public class RegistroParadaRequestDTO {
     private Integer id_usuario;
 
     @NotNull
-    private Date date;
+    private Date dt_parada;
 
     @NotNull
-    private String descricao;
+    private String des_setor;
 
-    public String getTipo_parada() {
-        return tipo_parada;
-    }
-
-    public void setTipo_parada(String tipo_parada) {
-        this.tipo_parada = tipo_parada;
-    }
+    @NotNull
+    private String des_parada;
 
     public Time getHora_inicio() {
         return hora_inicio;
@@ -78,19 +71,27 @@ public class RegistroParadaRequestDTO {
         this.id_usuario = id_usuario;
     }
 
-    public Date getDate() {
-        return date;
+    public @NotNull Date getDt_parada() {
+        return dt_parada;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDt_parada(@NotNull Date dt_parada) {
+        this.dt_parada = dt_parada;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public @NotNull String getDes_setor() {
+        return des_setor;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDes_setor(@NotNull String des_setor) {
+        this.des_setor = des_setor;
+    }
+
+    public @NotNull String getDes_parada() {
+        return des_parada;
+    }
+
+    public void setDes_parada(@NotNull String des_parada) {
+        this.des_parada = des_parada;
     }
 }

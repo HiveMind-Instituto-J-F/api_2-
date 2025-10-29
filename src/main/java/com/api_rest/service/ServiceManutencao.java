@@ -43,8 +43,10 @@ public class ServiceManutencao {
 
         manutencaoExistente.setId_maquina(dto.getId_maquina());
         manutencaoExistente.setId_usuario(dto.getId_usuario());
-        manutencaoExistente.setFerramentas_utilizadas(dto.getFerramentas_utilizadas());
-        manutencaoExistente.setAcao_realizada(dto.getAcao_realizada());
+        manutencaoExistente.setDes_acao_realizada(dto.getDes_acao_realizada());
+        manutencaoExistente.setDes_setor(dto.getDes_setor());
+        manutencaoExistente.setHora_inicio(dto.getHora_inicio());
+        manutencaoExistente.setHora_final(dto.getHora_final());
 
         Manutencao manutencaoAtualizada = repositoryManutencao.save(manutencaoExistente);
         return objectMapper.convertValue(manutencaoAtualizada, ManutencaoResponseDTO.class);
@@ -59,11 +61,17 @@ public class ServiceManutencao {
         if (dto.getId_usuario() != null) {
             manutencaoExistente.setId_usuario(dto.getId_usuario());
         }
-        if (dto.getFerramentas_utilizadas() != null) {
-            manutencaoExistente.setFerramentas_utilizadas(dto.getFerramentas_utilizadas());
+        if (dto.getDes_acao_realizada() != null) {
+            manutencaoExistente.setDes_acao_realizada(dto.getDes_acao_realizada());
         }
-        if (dto.getAcao_realizada() != null) {
-            manutencaoExistente.setAcao_realizada(dto.getAcao_realizada());
+        if (dto.getDes_setor() != null) {
+            manutencaoExistente.setDes_setor(dto.getDes_setor());
+        }
+        if (dto.getHora_inicio() != null) {
+            manutencaoExistente.setHora_inicio(dto.getHora_inicio());
+        }
+        if (dto.getHora_final() != null) {
+            manutencaoExistente.setHora_final(dto.getHora_final());
         }
 
         Manutencao manutencaoAtualizada = repositoryManutencao.save(manutencaoExistente);

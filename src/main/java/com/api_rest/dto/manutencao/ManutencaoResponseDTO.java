@@ -1,30 +1,44 @@
 package com.api_rest.dto.manutencao;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+import java.sql.Time;
+
 public class ManutencaoResponseDTO {
-
     private Long id;
+
+    @NotNull(message = "O campo id_maquina é obrigatório")
     private Long id_maquina;
+
+    @NotNull(message = "O campo id_usuario é obrigatório")
     private Long id_usuario;
-    private String ferramentas_utilizadas;
-    private String acao_realizada;
 
-    public ManutencaoResponseDTO() {}
+    @Size(max = 255, message = "Esse campo só aceita no máximo 255 caracteres")
+    private String des_acao_realizada;
 
-    public ManutencaoResponseDTO(Long id, Long id_maquina, Long id_usuario, String ferramentas_utilizadas, String acao_realizada) {
-        this.id = id;
+    @Size(max = 255, message = "Esse campo só aceita no máximo 255 caracteres")
+    private String des_setor;
+    private Time hora_inicio;
+    private Time hora_final;
+
+    public ManutencaoResponseDTO(
+            Long id_maquina,
+            Long id_usuario,
+            String des_acao_realizada,
+            String des_setor,
+            Time hora_inicio,
+            Time hora_final
+    ) {
         this.id_maquina = id_maquina;
         this.id_usuario = id_usuario;
-        this.ferramentas_utilizadas = ferramentas_utilizadas;
-        this.acao_realizada = acao_realizada;
+        this.des_acao_realizada = des_acao_realizada;
+        this.des_setor = des_setor;
+        this.hora_inicio = hora_inicio;
+        this.hora_final = hora_final;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getId() {return id;}
 
     public Long getId_maquina() {
         return id_maquina;
@@ -42,19 +56,35 @@ public class ManutencaoResponseDTO {
         this.id_usuario = id_usuario;
     }
 
-    public String getFerramentas_utilizadas() {
-        return ferramentas_utilizadas;
+    public String getDes_acao_realizada() {
+        return des_acao_realizada;
     }
 
-    public void setFerramentas_utilizadas(String ferramentas_utilizadas) {
-        this.ferramentas_utilizadas = ferramentas_utilizadas;
+    public void setDes_acao_realizada(String des_acao_realizada) {
+        this.des_acao_realizada = des_acao_realizada;
     }
 
-    public String getAcao_realizada() {
-        return acao_realizada;
+    public String getDes_setor() {
+        return des_setor;
     }
 
-    public void setAcao_realizada(String acao_realizada) {
-        this.acao_realizada = acao_realizada;
+    public void setDes_setor(String des_setor) {
+        this.des_setor = des_setor;
+    }
+
+    public Time getHora_inicio() {
+        return hora_inicio;
+    }
+
+    public void setHora_inicio(Time hora_inicio) {
+        this.hora_inicio = hora_inicio;
+    }
+
+    public Time getHora_final() {
+        return hora_final;
+    }
+
+    public void setHora_final(Time hora_final) {
+        this.hora_final = hora_final;
     }
 }
