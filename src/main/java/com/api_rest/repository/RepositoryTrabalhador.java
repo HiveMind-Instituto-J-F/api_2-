@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface RepositoryTrabalhador extends JpaRepository<Trabalhador, Long> {
-    Optional<Trabalhador> findByLogin(String login);
-    boolean existsByLogin(String login);
+    Optional<Trabalhador> findByDesLogin(String desLogin);
+    //boolean existsBydes_login(String des_login);
 }

@@ -48,10 +48,10 @@ public class ServiceTrabalhador {
         Trabalhador trabalhadorExistente = objectMapper.convertValue(buscarTrabalhadorPorId(id), Trabalhador.class);
 
         trabalhadorExistente.setDes_tipo_perfil(trabalhadorRequestDTO.getDes_tipo_perfil());
-        trabalhadorExistente.setDes_login(trabalhadorRequestDTO.getDes_login());
+        trabalhadorExistente.setDesLogin(trabalhadorRequestDTO.getDes_login());
         trabalhadorExistente.setDes_senha(trabalhadorRequestDTO.getDes_senha());
         trabalhadorExistente.setDes_setor(trabalhadorRequestDTO.getDes_setor());
-        trabalhadorExistente.setDes_imagem(trabalhadorRequestDTO.getDes_imagem  ());
+        trabalhadorExistente.setDes_imagem(trabalhadorRequestDTO.getDesImagem());
 
         Trabalhador trabalhador = repository.save(trabalhadorExistente);
 
@@ -68,7 +68,7 @@ public class ServiceTrabalhador {
         }
 
         if (trabalhadorRequestDTO.getDes_login() != null) {
-            trabalhadorExistente.setDes_login(trabalhadorRequestDTO.getDes_login());
+            trabalhadorExistente.setDesLogin(trabalhadorRequestDTO.getDes_login());
         }
 
         if (trabalhadorRequestDTO.getDes_senha() != null) {
@@ -79,8 +79,8 @@ public class ServiceTrabalhador {
             trabalhadorExistente.setDes_setor(trabalhadorRequestDTO.getDes_setor());
         }
 
-        if (trabalhadorRequestDTO.getDes_imagem() != null) {
-            trabalhadorExistente.setDes_imagem(trabalhadorRequestDTO.getDes_imagem());
+        if (trabalhadorRequestDTO.getDesImagem() != null) {
+            trabalhadorExistente.setDes_imagem(trabalhadorRequestDTO.getDesImagem());
         }
 
         Trabalhador trabalhador = repository.save(trabalhadorExistente);
@@ -97,9 +97,9 @@ public class ServiceTrabalhador {
         return objectMapper.convertValue(tr, TrabalhadorResponseDTO.class);
     }
 
-    public Trabalhador buscarTrabalhadorPorLogin(String login) {
-        return repository.findByLogin(login)
-                .orElseThrow(() -> new EntityNotFoundException("Trabalhador não encontrado com login: " + login));
+    public Trabalhador buscarTrabalhadorPorLogin(String des_login) {
+        return repository.findByDesLogin(des_login)
+                .orElseThrow(() -> new EntityNotFoundException("Trabalhador não encontrado com login: " + des_login));
     }
 
     public boolean autenticarTrabalhador(String login, String senha) {

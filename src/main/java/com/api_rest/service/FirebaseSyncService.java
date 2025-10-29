@@ -6,7 +6,6 @@ import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.Query;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -35,11 +34,10 @@ public class FirebaseSyncService {
         try {
             Map<String, Object> firebaseTrabalhador = new HashMap<>();
             firebaseTrabalhador.put("id", trabalhador.getId());
-            firebaseTrabalhador.put("id_planta", trabalhador.getId_planta());
-            firebaseTrabalhador.put("tipo_perfil", trabalhador.getTipo_perfil());
-            firebaseTrabalhador.put("login", trabalhador.getLogin());
-            firebaseTrabalhador.put("senha", trabalhador.getSenha());
-            firebaseTrabalhador.put("setor", trabalhador.getSetor());
+            firebaseTrabalhador.put("tipo_perfil", trabalhador.getDes_tipo_perfil());
+            firebaseTrabalhador.put("login", trabalhador.getDesLogin());
+            firebaseTrabalhador.put("senha", trabalhador.getDes_senha());
+            firebaseTrabalhador.put("setor", trabalhador.getDes_setor());
             firebaseTrabalhador.put("sqlId", trabalhador.getId());
             firebaseTrabalhador.put("lastSync", new Date());
 
@@ -48,7 +46,7 @@ public class FirebaseSyncService {
                     .set(firebaseTrabalhador);
 
             result.get();
-            return CompletableFuture.completedFuture("Trabalhador " + trabalhador.getLogin() + " sincronizado com Firebase");
+            return CompletableFuture.completedFuture("Trabalhador " + trabalhador.getDesLogin() + " sincronizado com Firebase");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,7 +107,7 @@ public class FirebaseSyncService {
                 if (!trabalhadorExistsInFirebase(trabalhador.getId())) {
                     syncTrabalhadorToFirebase(trabalhador);
                     syncedCount++;
-                    System.out.println("Novo trabalhador sincronizado: " + trabalhador.getLogin());
+                    System.out.println("Novo trabalhador sincronizado: " + trabalhador.getDesLogin());
                 }
             }
 

@@ -5,53 +5,53 @@ import jakarta.validation.constraints.NotNull;
 public class TrabalhadorRequestDTO {
 
     @NotNull
-    private String des_tipo_perfil;
+    private String desTipoPerfil;
     @NotNull
-    private String des_login;
+    private String desLogin;
     @NotNull
-    private String des_senha;
+    private String desSenha;
     @NotNull
-    private String des_setor;
+    private String desSetor;
     @NotNull
-    private String des_imagem;
+    private String desImagem;
 
     public String getDes_tipo_perfil() {
-        return des_tipo_perfil;
+        return desTipoPerfil;
     }
 
     public void setDes_tipo_perfil( String des_tipo_perfil) {
-        this.des_tipo_perfil = des_tipo_perfil;
+        this.desTipoPerfil = des_tipo_perfil;
     }
 
     public String getDes_login() {
-        return des_login;
+        return desLogin;
     }
 
     public void setDes_login(String des_login) {
-        this.des_login = des_login;
+        this.desLogin = des_login;
     }
 
     public String getDes_senha() {
-        return des_senha;
+        return desSenha;
     }
 
     public void setDes_senha( String des_senha) {
-        this.des_senha = des_senha;
+        this.desSenha = des_senha;
     }
 
     public String getDes_setor() {
-        return des_setor;
+        return desSetor;
     }
 
     public void setDes_setor( String des_setor) {
-        this.des_setor = des_setor;
+        this.desSetor = des_setor;
     }
 
-    public String getDes_imagem() {
-        return des_imagem;
+    public String getDesImagem() {
+        return desImagem;
     }
 
-    public void setDes_imagem( String des_imagem) {
-        this.des_imagem = des_imagem;
+    public void setDesImagem(String desImagem) {
+        this.desImagem = desImagem;
     }
 }
