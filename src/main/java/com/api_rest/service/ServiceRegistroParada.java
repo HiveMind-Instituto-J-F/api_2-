@@ -8,7 +8,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class ServiceRegistroParada {
@@ -34,23 +37,6 @@ public class ServiceRegistroParada {
     public RegistroParadaResponseDTO inserirRegistros(RegistroParadaRequestDTO dto){
         RegistroParadas registro = objectMapper.convertValue(dto, RegistroParadas.class);
         repositoryRegistroParada.save(registro);
-        return objectMapper.convertValue(registro, RegistroParadaResponseDTO.class);
-    }
-
-    public RegistroParadaResponseDTO inserirRegistroFunction(RegistroParadaRequestDTO dto) {
-        Integer idGerado = repositoryRegistroParada.inserirRegistroParada(
-                dto.getId_maquina(),
-                dto.getId_usuario(),
-                dto.getId_manutencao(),
-                dto.getHora_inicio(),
-                dto.getHora_fim(),
-                dto.getDt_parada(),
-                dto.getDes_parada()
-        );
-
-        RegistroParadas registro = objectMapper.convertValue(dto, RegistroParadas.class);
-        registro.setId_registro_paradas(idGerado.longValue());
-
         return objectMapper.convertValue(registro, RegistroParadaResponseDTO.class);
     }
 

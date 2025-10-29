@@ -38,7 +38,7 @@ public class ControllerRegistroParada {
     public String inserirRegistroParadaProcedure(@RequestBody RegistroParadaRequestDTO dto) {
         RegistroParadaResponseDTO resposta = serviceRegistroParada.inserirRegistroProcedure(dto);
         return "O registro foi inserido com sucesso!";
-    }
+    }   
 
     @PutMapping("/atualizar/{id}")
     public String atualizarRegistroParada(@PathVariable Long id, @RequestBody RegistroParadaRequestDTO dto) {

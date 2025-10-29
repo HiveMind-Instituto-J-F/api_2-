@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 public class RegistroParadas {
