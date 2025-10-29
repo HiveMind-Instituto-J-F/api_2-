@@ -4,20 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdb0d51d-3528-4865-abe1-79bca43d9f32" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/model/Login.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/repository/RepositoryLogin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/service/ServiceLogin.java" afterDir="false" />
+    <list default="true" id="bdb0d51d-3528-4865-abe1-79bca43d9f32" name="Changes" comment="Ajustando as mudanças do banco SQL popularizado">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/controller/ControllerFirebase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/controller/ControllerFirebase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/firebase/Firebase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/firebase/Firebase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/service/ServiceFirebase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/service/ServiceFirebase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/controller/ControllerFirebase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/controller/ControllerFirebase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/exception/ManipuladorGlobalException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/exception/ManipuladorGlobalException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/firebase/Firebase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/firebase/Firebase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/security/CorsSecurity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/security/CorsSecurity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/service/ServiceFirebase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/service/ServiceFirebase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/dto/trabalhador/TrabalhadorResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/dto/trabalhador/TrabalhadorResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/model/Trabalhador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/model/Trabalhador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/repository/RepositoryTrabalhador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/repository/RepositoryTrabalhador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/service/FirebaseSyncService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/service/FirebaseSyncService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/service/ServiceTrabalhador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/service/ServiceTrabalhador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/http/trabalhador/listarTrabalhador.http" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/http/trabalhador/listarTrabalhador.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/dto/trabalhador/TrabalhadorResponseDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/dto/trabalhador/TrabalhadorResponseDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/model/Trabalhador.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/model/Trabalhador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/repository/RepositoryTrabalhador.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/repository/RepositoryTrabalhador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/service/ServiceTrabalhador.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/service/ServiceTrabalhador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/http/trabalhador/listarTrabalhador.http" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/http/trabalhador/listarTrabalhador.http" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +32,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -41,6 +45,13 @@
     &quot;assignee&quot;: &quot;TrocaTine&quot;
   }
 }</component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value=".*" />
+      </list>
+    </option>
+  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/HiveMind-Instituto-J-F/api_2-.git&quot;,
@@ -61,6 +72,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
@@ -71,31 +85,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven.API_Rest [clean,compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.API_Rest [clean,install,-XX].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.API_Rest [clean,install,-X].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.API_Rest [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ApiRestApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/danielsousa-ieg/inter/api_2-&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "HTTP Request.listarTrabalhador | GET request to example server.executor": "Run",
+    "Maven.API_Rest [clean,compile].executor": "Run",
+    "Maven.API_Rest [clean,install,-XX].executor": "Run",
+    "Maven.API_Rest [clean,install,-X].executor": "Run",
+    "Maven.API_Rest [clean,install].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.ApiRestApplication.executor": "Run",
+    "git-widget-placeholder": "joas",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/joasoliveira-ieg/OneDrive - Instituto Germinare/Área de Trabalho/Interdiciplinar/api_2-/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\joasoliveira-ieg\OneDrive - Instituto Germinare\Área de Trabalho\Interdiciplinar\api_2-\src\main\resources" />
       <recent name="C:\Users\danielsousa-ieg\inter\api_2-" />
       <recent name="C:\Users\danielsousa-ieg\inter\api_2-\src" />
     </key>
@@ -111,7 +127,10 @@
       <command value="mvn clean compile" />
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.ApiRestApplication">
+    <configuration name="listarTrabalhador | GET request to example server" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/trabalhador/listarTrabalhador.http" requestIdentifier="GET request to example server" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="api_2-" />
       <method v="2">
@@ -125,6 +144,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.listarTrabalhador | GET request to example server" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -153,10 +177,23 @@
       <workItem from="1761576060578" duration="102000" />
       <workItem from="1761614298176" duration="633000" />
     </task>
+    <task id="LOCAL-00001" summary="Ajustando as mudanças do banco SQL popularizado">
+      <option name="closed" value="true" />
+      <created>1761735704901</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1761735704901</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Ajustando as mudanças do banco SQL popularizado" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajustando as mudanças do banco SQL popularizado" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

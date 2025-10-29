@@ -1,30 +1,37 @@
 package com.api_rest.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Trabalhador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String des_tipo_perfil;
-    private String des_login;
-    private String des_senha;
-    private String des_setor;
-    private String des_imagem;
+
+    @Column(name = "des_tipo_perfil")
+    private String desTipoPerfil;
+
+    @Column(name = "des_login")
+    private String desLogin;
+
+    @Column(name = "des_senha")
+    private String desSenha;
+
+    @Column(name = "des_setor")
+    private String desSetor;
+
+    @Column(name = "des_imagem")
+    private String desImagem;
 
     public Trabalhador() {
     }
 
     public Trabalhador(String des_tipo_perfil, String des_login, String des_senha, String des_setor, String des_imagem) {
-        this.des_tipo_perfil = des_tipo_perfil;
-        this.des_login = des_login;
-        this.des_senha = des_senha;
-        this.des_setor = des_setor;
-        this.des_imagem = des_imagem;
+        this.desTipoPerfil = des_tipo_perfil;
+        this.desLogin = des_login;
+        this.desSenha = des_senha;
+        this.desSetor = des_setor;
+        this.desImagem = des_imagem;
     }
 
     public Long getId() {
@@ -32,54 +39,54 @@ public class Trabalhador {
     }
 
     public String getDes_tipo_perfil() {
-        return des_tipo_perfil;
+        return desTipoPerfil;
     }
 
     public void setDes_tipo_perfil(String des_tipo_perfil) {
-        this.des_tipo_perfil = des_tipo_perfil;
+        this.desTipoPerfil = des_tipo_perfil;
     }
 
-    public String getDes_login() {
-        return des_login;
+    public String getDesLogin() {
+        return desLogin;
     }
 
-    public void setDes_login(String des_login) {
-        this.des_login = des_login;
+    public void setDesLogin(String desLogin) {
+        this.desLogin = desLogin;
     }
 
     public String getDes_senha() {
-        return des_senha;
+        return desSenha;
     }
 
     public void setDes_senha(String des_senha) {
-        this.des_senha = des_senha;
+        this.desSenha = des_senha;
     }
 
     public String getDes_setor() {
-        return des_setor;
+        return desSetor;
     }
 
     public void setDes_setor(String des_setor) {
-        this.des_setor = des_setor;
+        this.desSetor = des_setor;
     }
 
     public String getDes_imagem() {
-        return des_imagem;
+        return desImagem;
     }
 
     public void setDes_imagem(String des_imagem) {
-        this.des_imagem = des_imagem;
+        this.desImagem = des_imagem;
     }
 
     @Override
     public String toString() {
         return "Trabalhador{" +
                 "id=" + id +
-                ", des_tipo_perfil='" + des_tipo_perfil + '\'' +
-                ", des_login='" + des_login + '\'' +
-                ", des_senha='" + des_senha + '\'' +
-                ", des_setor='" + des_setor + '\'' +
-                ", des_imagem='" + des_imagem + '\'' +
+                ", des_tipo_perfil='" + desTipoPerfil + '\'' +
+                ", des_login='" + desLogin + '\'' +
+                ", des_senha='" + desSenha + '\'' +
+                ", des_setor='" + desSetor + '\'' +
+                ", des_imagem='" + desImagem + '\'' +
                 '}';
     }
 }

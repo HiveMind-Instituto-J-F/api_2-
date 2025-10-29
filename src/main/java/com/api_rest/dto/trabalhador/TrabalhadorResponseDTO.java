@@ -15,7 +15,7 @@ public class TrabalhadorResponseDTO {
     public TrabalhadorResponseDTO(Trabalhador trabalhador) {
         this.id = trabalhador.getId();
         this.des_tipo_perfil = trabalhador.getDes_tipo_perfil();
-        this.des_login = trabalhador.getDes_login();
+        this.des_login = trabalhador.getDesLogin();
         this.des_senha = trabalhador.getDes_senha();
         this.des_setor = trabalhador.getDes_setor();
         this.des_imagem = trabalhador.getDes_imagem();
