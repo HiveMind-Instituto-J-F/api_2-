@@ -30,6 +30,7 @@ public class ManutencaoResponseDTO {
             Long id_usuario,
             String des_acao_realizada,
             String des_setor,
+            Date dt_manutencao,
             Time hora_inicio,
             Time hora_fim
     ) {
@@ -37,6 +38,7 @@ public class ManutencaoResponseDTO {
         this.id_usuario = id_usuario;
         this.des_acao_realizada = des_acao_realizada;
         this.des_setor = des_setor;
+        this.dt_manutencao = dt_manutencao;
         this.hora_inicio = hora_inicio;
         this.hora_fim = hora_fim;
     }

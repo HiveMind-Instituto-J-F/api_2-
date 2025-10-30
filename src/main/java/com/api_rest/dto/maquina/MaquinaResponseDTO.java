@@ -10,7 +10,8 @@ public class MaquinaResponseDTO {
     private String des_status_operacional;
     private Integer des_nivel_confianca;
 
-    public MaquinaResponseDTO(String des_nome, String des_tipo, String des_setor, String des_maquina, String des_status_operacional, Integer des_nivel_confianca) {
+    public MaquinaResponseDTO(String des_nome, String des_tipo, String des_setor, String des_maquina,
+                              String des_status_operacional, Integer des_nivel_confianca) {
         this.des_nome = des_nome;
         this.des_tipo = des_tipo;
         this.des_setor = des_setor;
