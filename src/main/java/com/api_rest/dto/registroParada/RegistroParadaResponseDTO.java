@@ -16,9 +16,6 @@ public class RegistroParadaResponseDTO {
     private String des_setor;
     private String des_parada;
 
-    public RegistroParadaResponseDTO() {
-    }
-
     public RegistroParadaResponseDTO(RegistroParadas registroParada) {
         this.id_registro_paradas = registroParada.getId_registro_paradas();
         this.hora_inicio = registroParada.getHora_inicio();

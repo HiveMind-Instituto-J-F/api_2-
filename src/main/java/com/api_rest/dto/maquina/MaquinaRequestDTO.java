@@ -1,23 +1,31 @@
 package com.api_rest.dto.maquina;
 
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class MaquinaRequestDTO {
 
+    @NotBlank(message = "O campo des_nome está vazio. Preenche-o")
     @Max(value = 100, message = "Esse campo só aceita no máximo 100 caracteres")
     private String des_nome;
 
+    @NotBlank(message = "O campo des_tipo está vazio. Preenche-o")
     @Max(value = 50, message = "Esse campo só aceita no máximo 50 caracteres")
     private String des_tipo;
 
+    @NotBlank(message = "O campo des_setor está vazio. Preenche-o")
     @Max(value = 50, message = "Esse campo só aceita no máximo 50 caracteres")
     private String des_setor;
 
+    @NotBlank(message = "O campo des_maquina está vazio. Preenche-o")
     private String des_maquina;
 
+    @NotBlank(message = "O campo des_status_operacional está vazio. Preenche-o")
     @Max(value = 50, message = "Esse campo só aceita no máximo 50 caracteres")
     private String des_status_operacional;
 
+    @NotNull(message = "O campo des_nivel_confianca está vazio. Preenche-o")
     private Integer des_nivel_confianca;
 
 

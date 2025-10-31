@@ -17,7 +17,14 @@ public class Maquina {
     private String des_status_operacional;
     private Integer des_nivel_confianca;
 
-    public Maquina(Integer nivel_confianca, String status_operacional, String descricao, String setor, String tipo, String nome) {
+    public Maquina(
+            Integer nivel_confianca,
+            String status_operacional,
+            String descricao,
+            String setor,
+            String tipo,
+            String nome
+    ) {
         this.des_nivel_confianca = nivel_confianca;
         this.des_status_operacional = status_operacional;
         this.des_maquina = descricao;
@@ -26,9 +33,7 @@ public class Maquina {
         this.des_nome = nome;
     }
 
-    public Maquina() {
-
-    }
+    public Maquina() {}
 
     public Long getId_maquina() {
         return id_maquina;

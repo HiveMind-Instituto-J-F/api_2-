@@ -1,7 +1,8 @@
 package com.api_rest.dto.maquina;
 
-public class MaquinaResponseDTO {
+import com.api_rest.model.Maquina;
 
+public class MaquinaResponseDTO {
     private Long id_maquina;
     private String des_nome;
     private String des_tipo;
@@ -10,13 +11,14 @@ public class MaquinaResponseDTO {
     private String des_status_operacional;
     private Integer des_nivel_confianca;
 
-    public MaquinaResponseDTO(String des_nome, String des_tipo, String des_setor, String des_maquina, String des_status_operacional, Integer des_nivel_confianca) {
-        this.des_nome = des_nome;
-        this.des_tipo = des_tipo;
-        this.des_setor = des_setor;
-        this.des_maquina = des_maquina;
-        this.des_status_operacional = des_status_operacional;
-        this.des_nivel_confianca = des_nivel_confianca;
+    public MaquinaResponseDTO(Maquina maquina) {
+        this.id_maquina = maquina.getId_maquina();
+        this.des_nome = maquina.getDes_nome();
+        this.des_tipo = maquina.getDes_tipo();
+        this.des_setor = maquina.getDes_setor();
+        this.des_maquina = maquina.getDes_maquina();
+        this.des_status_operacional = maquina.getDes_status_operacional();
+        this.des_nivel_confianca = maquina.getDes_nivel_confianca();
     }
 
     public Long getId_maquina() {

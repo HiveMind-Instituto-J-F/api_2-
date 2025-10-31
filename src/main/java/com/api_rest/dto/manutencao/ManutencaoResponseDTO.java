@@ -1,44 +1,28 @@
 package com.api_rest.dto.manutencao;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import com.api_rest.model.Manutencao;
 
 import java.sql.Date;
 import java.sql.Time;
 
 public class ManutencaoResponseDTO {
     private Long id_manutencao;
-
-    @NotNull(message = "O campo id_maquina é obrigatório")
     private Long id_maquina;
-
-    @NotNull(message = "O campo id_usuario é obrigatório")
     private Long id_usuario;
-
-    @Size(max = 255, message = "Esse campo só aceita no máximo 255 caracteres")
     private String des_acao_realizada;
-
-    @Size(max = 255, message = "Esse campo só aceita no máximo 255 caracteres")
     private String des_setor;
-
     private Date dt_manutencao;
     private Time hora_inicio;
     private Time hora_fim;
 
-    public ManutencaoResponseDTO(
-            Long id_maquina,
-            Long id_usuario,
-            String des_acao_realizada,
-            String des_setor,
-            Time hora_inicio,
-            Time hora_fim
-    ) {
-        this.id_maquina = id_maquina;
-        this.id_usuario = id_usuario;
-        this.des_acao_realizada = des_acao_realizada;
-        this.des_setor = des_setor;
-        this.hora_inicio = hora_inicio;
-        this.hora_fim = hora_fim;
+    public ManutencaoResponseDTO(Manutencao manutencao) {
+        this.id_manutencao = manutencao.getId_manutencao();
+        this.id_maquina = manutencao.getId_maquina();
+        this.id_usuario = manutencao.getId_usuario();
+        this.des_acao_realizada = manutencao.getDes_acao_realizada();
+        this.des_setor = manutencao.getDes_setor();
+        this.hora_inicio = manutencao.getHora_inicio();
+        this.hora_fim = manutencao.getHora_fim();
     }
 
     public Long getId_manutencao() {return id_manutencao;}

@@ -23,16 +23,21 @@ public class Trabalhador {
     @Column(name = "des_imagem")
     private String desImagem;
 
-    public Trabalhador() {
-    }
-
-    public Trabalhador(String des_tipo_perfil, String des_login, String des_senha, String des_setor, String des_imagem) {
+    public Trabalhador(
+            String des_tipo_perfil,
+            String des_login,
+            String des_senha,
+            String des_setor,
+            String des_imagem
+    ) {
         this.desTipoPerfil = des_tipo_perfil;
         this.desLogin = des_login;
         this.desSenha = des_senha;
         this.desSetor = des_setor;
         this.desImagem = des_imagem;
     }
+
+    public Trabalhador() {}
 
     public Long getId_trabalhador() {
         return id_trabalhador;

@@ -15,7 +15,12 @@ public class Login {
     private String des_cadastrante;
     private String des_email;
 
-    public Login(String cnpj, String senha, String cadastrante, String email) {
+    public Login(
+            String cnpj,
+            String senha,
+            String cadastrante,
+            String email
+    ) {
         this.des_cnpj = cnpj;
         this.des_senha = senha;
         this.des_cadastrante = cadastrante;

@@ -1,5 +1,6 @@
 package com.api_rest.dto.manutencao;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -14,16 +15,21 @@ public class ManutencaoRequestDTO {
     @NotNull(message = "O campo id_usuario é obrigatório")
     private Long id_usuario;
 
+    @NotBlank(message = "O campo des_acao_realizada está vazio. Preenche-o")
     @Size(max = 255, message = "Esse campo só aceita no máximo 255 caracteres")
     private String des_acao_realizada;
 
+    @NotBlank(message = "O campo des_setor está vazio. Preenche-o")
     @Size(max = 255, message = "Esse campo só aceita no máximo 255 caracteres")
     private String des_setor;
 
+    @NotNull(message = "O campo dt_nanutencao está vazio. Preenche-o")
     private Date dt_manutencao;
 
+    @NotNull(message = "O campo hora_inicio está vazio. Preenche-o")
     private Time hora_inicio;
 
+    @NotNull(message = "O campo hora_fim está vazio. Preenche-o")
     private Time hora_fim;
 
     public Long getId_maquina() {
