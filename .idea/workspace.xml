@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdb0d51d-3528-4865-abe1-79bca43d9f32" name="Changes" comment="Ajustando as mudanças do banco SQL popularizado">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/dto/trabalhador/TrabalhadorResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/dto/trabalhador/TrabalhadorResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/model/Trabalhador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/model/Trabalhador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/repository/RepositoryTrabalhador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/repository/RepositoryTrabalhador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/service/FirebaseSyncService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/service/FirebaseSyncService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/api_rest/service/ServiceTrabalhador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/api_rest/service/ServiceTrabalhador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/http/trabalhador/listarTrabalhador.http" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/http/trabalhador/listarTrabalhador.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/dto/trabalhador/TrabalhadorResponseDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/dto/trabalhador/TrabalhadorResponseDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/model/Trabalhador.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/model/Trabalhador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/repository/RepositoryTrabalhador.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/repository/RepositoryTrabalhador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api_rest/service/ServiceTrabalhador.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api_rest/service/ServiceTrabalhador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/http/trabalhador/listarTrabalhador.http" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/http/trabalhador/listarTrabalhador.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

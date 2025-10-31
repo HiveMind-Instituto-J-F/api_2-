@@ -10,8 +10,6 @@ public class TrabalhadorResponseDTO {
     private String des_setor;
     private String des_imagem;
 
-    public TrabalhadorResponseDTO() {}
-
     public TrabalhadorResponseDTO(Trabalhador trabalhador) {
         this.id_trabalhador = trabalhador.getId_trabalhador();
         this.des_tipo_perfil = trabalhador.getDes_tipo_perfil();

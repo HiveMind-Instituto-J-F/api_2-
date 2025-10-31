@@ -1,5 +1,6 @@
 package com.api_rest.dto.registroParada;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.sql.Time;
@@ -7,28 +8,28 @@ import java.sql.Date;
 
 public class RegistroParadaRequestDTO {
 
-    @NotNull
+    @NotNull(message = "O campo hora_Inicio está vazio. Preenche-o")
     private Time hora_inicio;
 
-    @NotNull
+    @NotNull(message = "O campo hora_Fim está vazio. Preenche-o")
     private Time hora_fim;
 
-    @NotNull
+    @NotNull(message = "O campo id_maquina está vazio. Preenche-o")
     private Integer id_maquina;
 
-    @NotNull
+    @NotNull(message = "O campo id_manutencao está vazio. Preenche-o")
     private Integer id_manutencao;
 
-    @NotNull
+    @NotNull(message = "O campo id_usuario está vazio. Preenche-o")
     private Integer id_usuario;
 
-    @NotNull
+    @NotNull(message = "O campo dt_parada está vazio. Preenche-o")
     private Date dt_parada;
 
-    @NotNull
+    @NotBlank(message = "O campo des_setor está vazio. Preenche-o")
     private String des_setor;
 
-    @NotNull
+    @NotBlank(message = "O campo des_parada está vazio. Preenche-o")
     private String des_parada;
 
     public Time getHora_inicio() {
@@ -71,27 +72,27 @@ public class RegistroParadaRequestDTO {
         this.id_usuario = id_usuario;
     }
 
-    public @NotNull Date getDt_parada() {
+    public Date getDt_parada() {
         return dt_parada;
     }
 
-    public void setDt_parada(@NotNull Date dt_parada) {
+    public void setDt_parada(Date dt_parada) {
         this.dt_parada = dt_parada;
     }
 
-    public @NotNull String getDes_setor() {
+    public String getDes_setor() {
         return des_setor;
     }
 
-    public void setDes_setor(@NotNull String des_setor) {
+    public void setDes_setor(String des_setor) {
         this.des_setor = des_setor;
     }
 
-    public @NotNull String getDes_parada() {
+    public String getDes_parada() {
         return des_parada;
     }
 
-    public void setDes_parada(@NotNull String des_parada) {
+    public void setDes_parada(String des_parada) {
         this.des_parada = des_parada;
     }
 }

@@ -22,12 +22,14 @@ public class Manutencao {
     private Time hora_inicio;
     private Time hora_fim;
 
-    public Manutencao() {
-
-    }
-
-    public Manutencao(Long id_manutencao, Long id_maquina, Long id_usuario, String des_setor, String acao_realizada, Date dt_manutencao, Time hora_inicio, Time hora_fim) {
-        this.id_manutencao = id_manutencao;
+    public Manutencao(
+            Long id_maquina,
+            Long id_usuario,
+            String des_setor,
+            String acao_realizada,
+            Time hora_inicio,
+            Time hora_fim
+    ) {
         this.id_maquina = id_maquina;
         this.id_usuario = id_usuario;
         this.des_setor = des_setor;
@@ -36,6 +38,8 @@ public class Manutencao {
         this.hora_inicio = hora_inicio;
         this.hora_fim = hora_fim;
     }
+
+    public Manutencao() {}
 
     public Long getId_manutencao() {
         return id_manutencao;

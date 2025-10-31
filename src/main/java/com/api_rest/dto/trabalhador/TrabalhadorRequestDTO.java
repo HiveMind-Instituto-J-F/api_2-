@@ -1,18 +1,18 @@
 package com.api_rest.dto.trabalhador;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
 public class TrabalhadorRequestDTO {
 
-    @NotNull
+    @NotBlank(message = "O campo desTipoPerfil está vazio. Preenche-o")
     private String desTipoPerfil;
-    @NotNull
+    @NotBlank(message = "O campo desLogin está vazio. Preenche-o")
     private String desLogin;
-    @NotNull
+    @NotBlank(message = "O campo desSenha está vazio. Preenche-o")
     private String desSenha;
-    @NotNull
+    @NotBlank(message = "O campo desSetor está vazio. Preenche-o")
     private String desSetor;
-    @NotNull
+    @NotBlank(message = "O campo desImagem está vazio. Preenche-o")
     private String desImagem;
 
     public String getDes_tipo_perfil() {
