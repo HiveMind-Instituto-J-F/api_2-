@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.sql.Date;
 import java.sql.Time;
 
 @Entity
@@ -17,6 +18,7 @@ public class Manutencao {
     private Long id_usuario;
     private String des_acao_realizada;
     private String des_setor;
+    private Date dt_manutencao;
     private Time hora_inicio;
     private Time hora_fim;
 
@@ -32,6 +34,7 @@ public class Manutencao {
         this.id_usuario = id_usuario;
         this.des_setor = des_setor;
         this.des_acao_realizada = acao_realizada;
+        this.dt_manutencao = dt_manutencao;
         this.hora_inicio = hora_inicio;
         this.hora_fim = hora_fim;
     }
@@ -71,6 +74,14 @@ public class Manutencao {
 
     public void setDes_setor(String setor) {
         this.des_setor = setor;
+    }
+
+    public Date getDt_manutencao() {
+        return dt_manutencao;
+    }
+
+    public void setDt_manutencao(Date dt_manutencao) {
+        this.dt_manutencao = dt_manutencao;
     }
 
     public Time getHora_inicio() {
