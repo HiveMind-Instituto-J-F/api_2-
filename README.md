@@ -1,31 +1,22 @@
-#  Hive Mind — Dashboard Web
+# Hive Mind — API Industrial (Spring Boot + PostgreSQL)
 
-Dashboard web do Hive Mind para visualização e análise de microparadas, manutenções e métricas operacionais.
-
----
-
-## Funcionalidades
-- Login e autenticação
-- Dashboard de indicadores
-- Listagem e filtros de registros
-- Gráficos e visualizações
-- Integração com API
-- Tema e responsividade
+API responsável pelos dados industriais, usuários, áreas, registros e integrações do Hive Mind.
 
 ---
 
 ## Tecnologias
-| Tipo | Stack |
-|----------------|------------------------------|
-| Framework | React |
-| Estilo | CSS comum |
-| Gráficos | Recharts / Chart.js |
+- Java 17+
+- Spring Boot
+- Spring MVC
+- JPA / Hibernate
+- PostgreSQL
+- Docker
+- Swagger
 
 ---
 
-## Instalação
+## Rodando o Projeto
 ```bash
-git clone https://github.com/HiveMind-Instituto-J-F/hivemind-frontend.git
-cd hivemind-frontend
-npm install
-npm run dev
+git clone https://github.com/HiveMind-Instituto-J-F/hivemind-backend-sql.git
+cd hivemind-backend-sql
+mvn spring-boot:run
