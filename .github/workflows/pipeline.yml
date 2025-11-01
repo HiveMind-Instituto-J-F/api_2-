@@ -29,10 +29,10 @@ jobs:
         echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
 
     - name: Build and Package with Maven (skip tests)
-      run: cd API_Rest && mvn -B clean package -DskipTests --file pom.xml
+      run: mvn -B clean package -DskipTests --file pom.xml
 
     - name: Upload JAR Artifact
       uses: actions/upload-artifact@v4
       with:
         name: springboot-app
-        path: API_Rest/target/*.jar
+        path: target/*.jar
